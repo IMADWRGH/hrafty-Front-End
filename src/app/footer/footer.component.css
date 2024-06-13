@@ -1,0 +1,31 @@
+.footer {
+    background-color: black;
+}
+
+h5 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgba(115, 74, 236, 0.596);
+}
+
+i {
+    padding: 0.5rem;
+}
+
+p,
+i {
+    color: white;
+}
+
+a {
+    color: #fff;
+
+    font-weight: bold;
+    text-decoration: none;
+}
+
+footer {
+    overflow: hidden;
+    position: sticky;
+    top: 100%;
+
+}
