@@ -1,0 +1,48 @@
+.hero {
+    height: 100vh;
+}
+
+.btn-outline-dark {
+    color: #343a40;
+    border-color: #343a40;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin: 20px 0;
+}
+
+.overflow-hidden {
+    position: relative;
+    height: 100%;
+}
+
+.scrolling-images {
+    background-color: #f4f4f7;
+    height: 100%;
+    animation: scrollImages 20s linear infinite;
+
+}
+
+.scrolling-images .col-6 {
+    position: relative;
+}
+
+.scrolling-images img {
+    width: 100%;
+}
+
+@keyframes scrollImages {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}

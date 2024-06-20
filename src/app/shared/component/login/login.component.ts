@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthResponse } from 'src/app/models/AuthResponse.model';
+import { Auth } from 'src/app/models/Auth.model';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,7 @@ export class LoginComponent {
   login() {
     const { value } = this.loginForm;
     this.service.login(value.email, value.password).subscribe({
-      next: (response: AuthResponse) => {
+      next: (response: Auth) => {
         localStorage.setItem('user', JSON.stringify(response.user));
         if (response.customer) {
           localStorage.setItem('customer', JSON.stringify(response.customer));

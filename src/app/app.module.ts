@@ -5,24 +5,32 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './shared/component/login/login.component';
-import { SingupComponent } from './shared/component/singup/singup.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ChooseRegistrationComponent } from './shared/component/choose-registration/choose-registration.component';
+import { SellerRegistrationComponent } from './shared/component/seller-registration/seller-registration.component';
+import { CustomerRegistrationComponent } from './shared/component/customer-registration/customer-registration.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SingupComponent,
+
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ChooseRegistrationComponent,
+    SellerRegistrationComponent,
+    CustomerRegistrationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

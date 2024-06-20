@@ -1,0 +1,214 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div
+      class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2"
+    >
+      <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+        <h2 id="heading">Sign Up Your User Account</h2>
+        <p>Fill all form fields to go to the next step</p>
+        <form id="msform">
+          <br />
+          <!-- Step 1: User Information -->
+          <fieldset *ngIf="currentStep === 0">
+            <form [formGroup]="userSignupFormGroup">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-7">
+                    <h2 class="fs-title">Account Information:</h2>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Email: *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Email"
+                    formControlName="email"
+                  />
+                  <div
+                    *ngIf="
+                      userSignupFormGroup.get('email')?.invalid &&
+                      (userSignupFormGroup.get('email')?.dirty ||
+                        userSignupFormGroup.get('email')?.touched)
+                    "
+                  >
+                    <div
+                      *ngIf="userSignupFormGroup.get('email')?.errors?.['required']"
+                    >
+                      Email is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Full Name: *</label>
+                  <input
+                    type="text"
+                    name="fullname"
+                    class="form-control"
+                    placeholder="Full Name"
+                    formControlName="fullname"
+                  />
+                  <div
+                    *ngIf="
+                      userSignupFormGroup.get('fullname')?.invalid &&
+                      (userSignupFormGroup.get('fullname')?.dirty ||
+                        userSignupFormGroup.get('fullname')?.touched)
+                    "
+                  >
+                    <div
+                      *ngIf="userSignupFormGroup.get('fullname')?.errors?.['required']"
+                    >
+                      Full name is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Password: *</label>
+                  <input
+                    type="password"
+                    name="pwd"
+                    placeholder="Password"
+                    formControlName="password"
+                  />
+                </div>
+                <div class="from-group">
+                  <label class="fieldlabels">Confirm Password: *</label>
+                  <input
+                    type="password"
+                    name="cpwd"
+                    placeholder="Confirm Password"
+                    [(ngModel)]="password_confirmation"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                </div>
+              </div>
+              <input
+                type="button"
+                name="next"
+                class="next action-button btn btn-primary"
+                value="Next"
+                (click)="next()"
+              />
+            </form>
+          </fieldset>
+
+          <!-- Step 2: Seller Information -->
+          <fieldset *ngIf="currentStep === 1">
+            <form [formGroup]="sellerSignupFormGroup">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-7">
+                    <h2 class="fs-title">Profile Information:</h2>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Number of Licenses: *</label>
+                  <input
+                    type="number"
+                    name="nb_license"
+                    class="form-control"
+                    placeholder="Number of Licenses"
+                    formControlName="nb_license"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Profile Image: *</label>
+                  <input
+                    type="file"
+                    name="image"
+                    class="form-control"
+                    placeholder="Profile Image"
+                    formControlName="image"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Sex: *</label>
+                  <select
+                    name="sexe"
+                    class="form-control"
+                    formControlName="sexe"
+                  >
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Phone: *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    class="form-control"
+                    placeholder="Phone Number"
+                    formControlName="phone"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="fieldlabels">Website: *</label>
+                  <input
+                    type="url"
+                    name="site"
+                    class="form-control"
+                    placeholder="Website URL"
+                    formControlName="site"
+                  />
+                </div>
+              </div>
+              <input
+                type="button"
+                name="next"
+                class="next action-button btn btn-primary"
+                value="Next"
+                (click)="next()"
+              />
+              <input
+                type="button"
+                name="previous"
+                class="previous action-button-previous btn btn-secondary"
+                value="Previous"
+                (click)="previous()"
+              />
+            </form>
+          </fieldset>
+
+          <!-- Step 3: Confirmation -->
+          <fieldset *ngIf="currentStep === 2">
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Finish:</h2>
+                </div>
+              </div>
+              <br /><br />
+              <h2 class="purple-text text-center"><strong>SUCCESS!</strong></h2>
+              <br /><br />
+              <div class="row justify-content-center">
+                <div class="col-3">
+                  <img
+                    src="https://i.imgur.com/GwStPmg.png"
+                    class="fit-image"
+                  />
+                </div>
+              </div>
+              <br /><br />
+              <div class="row justify-content-center">
+                <div class="col-7 text-center">
+                  <button
+                    type="submit"
+                    id="submit"
+                    class="submit-button btn btn-success"
+                    (click)="submitForm()"
+                  >
+                    <h5 class="purple-text text-center">
+                      You Have Successfully Signed Up. Go To Your Profile Page
+                    </h5>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

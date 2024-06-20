@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './shared/component/login/login.component';
-import { SingupComponent } from './shared/component/singup/singup.component';
+import { ChooseRegistrationComponent } from './shared/component/choose-registration/choose-registration.component';
+import { HomeComponent } from './home/home.component';
+import { SellerRegistrationComponent } from './shared/component/seller-registration/seller-registration.component';
+import { CustomerRegistrationComponent } from './shared/component/customer-registration/customer-registration.component';
 
 const routes: Routes = [
-  // { path: '**', redirectTo: '/home' },
-  // { path: '', redirectTo: 'home', pathMatch: 'full', title: 'Home - page' },
+  { path: '', redirectTo: 'home', pathMatch: 'full', title: 'Home - page' },
+  { path: 'home', component: HomeComponent, title: 'Home - page' },
   { path: 'login', component: LoginComponent, title: 'Login - page' },
-  { path: 'singup', component: SingupComponent, title: 'Singup - page' },
+  { path: 'singup', component: ChooseRegistrationComponent, title: 'Singup - page' },
+  {path:'seller-register',component:SellerRegistrationComponent},
+  {path:'customer-register',component:CustomerRegistrationComponent},
   {
     path: 'seller',
     loadChildren: () =>
