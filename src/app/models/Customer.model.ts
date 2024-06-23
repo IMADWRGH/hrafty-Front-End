@@ -1,3 +1,7 @@
 export interface Customer{
-    userId: number;
+    id?: number;
+    image?: string;
+    sexe?: string;
+    phone?: string;
+    userId?: number;
 }

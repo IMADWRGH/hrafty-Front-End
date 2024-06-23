@@ -6,7 +6,7 @@ import { Customer } from 'src/app/models/Customer.model';
 import { Seller } from 'src/app/models/Seller.model';
 import { User } from 'src/app/models/User.model';
 
-const API_URL = "http://localhost:8080/api/v1/auth/";
+const API_URL = "http://localhost:8080/api/v1/auth";
 
 @Injectable({
   providedIn: 'root'

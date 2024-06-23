@@ -1,1 +1,171 @@
-<p>customer-registration works!</p>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div
+      class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2"
+    >
+      <div class="card px-0 pt-4 pb-0">
+        <h2 id="heading">Sign Up Your User Account</h2>
+        <form
+          id="msform"
+          [formGroup]="userSignupFormGroup"
+          (ngSubmit)="onSubmit()"
+        >
+          <br />
+          <fieldset *ngIf="currentStep === 0">
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Account Information:</h2>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fieldlabels">Email: *</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                  formControlName="email"
+                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                />
+                <div
+                  *ngIf="submitted && f['email'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['email'].errors['required']">
+                    Email is required.
+                  </div>
+                  <div *ngIf="f['email'].errors['email']">
+                    Invalid email format.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fieldlabels">Full Name: *</label>
+                <input
+                  type="text"
+                  name="fullname"
+                  class="form-control"
+                  placeholder="Full Name"
+                  formControlName="fullName"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['fullName'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f['fullName'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['fullName'].errors['required']">
+                    Full Name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fieldlabels">Password: *</label>
+                <input
+                  type="password"
+                  name="pwd"
+                  class="form-control"
+                  placeholder="Password"
+                  formControlName="password"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['password'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f['password'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['password'].errors['required']">
+                    Password is required.
+                  </div>
+                  <div *ngIf="f['password'].errors['minlength']">
+                    Password must be at least 6 characters long.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fieldlabels">Profile Image: *</label>
+                <input
+                  type="file"
+                  name="image"
+                  class="form-control"
+                  placeholder="Profile Image"
+                  formControlName="image"
+                  (change)="onFileChange($event)"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['image'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f['image'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['image'].errors['required']">
+                    Profile Image is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fieldlabels">Sex: *</label>
+                <select
+                  name="sexe"
+                  class="form-control"
+                  formControlName="sexe"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['sexe'].errors
+                  }"
+                >
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+                <div
+                  *ngIf="submitted && f['sexe'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['sexe'].errors['required']">
+                    Sex is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fieldlabels">Phone: *</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  class="form-control"
+                  placeholder="Phone Number"
+                  formControlName="phone"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['phone'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f['phone'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['phone'].errors['required']">
+                    Phone Number is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-register p-2">
+                  Register
+                </button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="mx-4 p-2 btn btn-warning float-right"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,7 +30,6 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

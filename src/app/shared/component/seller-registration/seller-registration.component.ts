@@ -1,79 +1,84 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/models/User.model';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Auth } from 'src/app/models/Auth.model';
 
 @Component({
   selector: 'app-seller-registration',
   templateUrl: './seller-registration.component.html',
   styleUrls: ['./seller-registration.component.css']
 })
-export class SellerRegistrationComponent {
+export class SellerRegistrationComponent implements OnInit {
   currentStep: number = 0;
-  fieldsets: number[] = [0, 1]
-  steps: string[] = ['User Information', 'Profile Information'];
-  password_confirmation!:string;
+  submitted: boolean = false;
 
-  userSignupFormGroup!: FormGroup;
-  sellerSignupFormGroup!: FormGroup;
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  userSignupFormGroup: FormGroup = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    fullName: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    nb_license: ['', Validators.required],
+    image: ['', Validators.required],
+    sexe: ['', Validators.required],
+    phone: ['', Validators.required],
+    site: ['', Validators.required]
+  });
 
-  ngOnInit(): void {
-    this.userSignupFormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      fullname: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      phone: ['', Validators.required],
-      address: ['', Validators.required],
-      role: ['', Validators.required],
+  ngOnInit(): void { }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.userSignupFormGroup.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+
+    if (this.userSignupFormGroup.invalid) {
+      return;
+    }
+
+    const user = {
+      fullName: this.userSignupFormGroup.value.fullName,
+      email: this.userSignupFormGroup.value.email,
+      password: this.userSignupFormGroup.value.password,
+      role: 'SELLER'
+    };
+
+    const seller = {
+      nb_license: this.userSignupFormGroup.value.nb_license,
+      image: this.userSignupFormGroup.value.image,
+      sexe: this.userSignupFormGroup.value.sexe,
+      phone: this.userSignupFormGroup.value.phone,
+      site: this.userSignupFormGroup.value.site
+    };
+
+    const payload = { user, seller };
+
+    this.authService.registerSeller(payload).subscribe({
+      next: data => {
+        console.log('Seller registered successfully', data);
+      },
+      error: error => {
+        console.log('Error registering seller', error);
+      },
+      complete: () => {
+        console.log('Registration complete');
+      }
     });
-    this.sellerSignupFormGroup = this.formBuilder.group({
-      nbr_licese: ['', Validators.required],
-      image: ['', Validators.required],
-      sexe: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.minLength(12)]],
-      website: ['', Validators.required],
-    })
   }
 
-get f() {
-  return this.userSignupFormGroup.controls;
-
-}
-
-next(){
-  if(this.currentStep==0 && this.userSignupFormGroup.invalid){
-
-  }
-}
-
-  submitForm(): void {
-    // this.http.post('http://localhost:3000/users', this.userSignupFormGroup.value)
-    //   .subscribe((userResponse) => {
-    //     console.log('User created:', userResponse);
-
-    //     this.http.post('http://localhost:3000/candidats', {
-    //       user: userResponse,
-    //       ...this.candidatSignupFormGroup.value,
-    //       skills: this.selectedSkills,
-    //       education: [this.educationSignupFormGroup.value],
-    //       experiences: [this.experienceSignupFormGroup.value],
-    //     }).subscribe((candidatResponse) => {
-    //       console.log('Candidat created:', candidatResponse);
-    //       this.router.navigate(['/profile']); // Navigate to profile page after successful signup
-    //     });
-    //   });
+  onReset(): void {
+    this.submitted = false;
+    this.userSignupFormGroup.reset();
   }
 
-  previous(): void {
-    if (this.currentStep > 0) {
-      this.currentStep--;
+  onFileChange(event: any): void {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.userSignupFormGroup.patchValue({
+        image: file.name
+      });
     }
   }
 }

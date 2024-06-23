@@ -3,10 +3,6 @@
     padding: 0
 }
 
-html {
-    height: 100%
-}
-
 p {
     color: grey
 }
@@ -20,7 +16,7 @@ p {
 #msform {
     text-align: center;
     position: relative;
-    margin-top: 20px
+    margin-top: 10px
 }
 
 #msform fieldset {
@@ -30,7 +26,7 @@ p {
     box-sizing: border-box;
     width: 100%;
     margin: 0;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     position: relative
 }
 
@@ -209,6 +205,10 @@ p {
 
 .progress-bar {
     background-color: #673AB7
+}
+
+.btn-register {
+    background-color: #683ab7b4;
 }
 
 .fit-image {
