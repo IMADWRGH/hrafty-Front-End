@@ -12,6 +12,8 @@ import { ChooseRegistrationComponent } from './shared/component/choose-registrat
 import { SellerRegistrationComponent } from './shared/component/seller-registration/seller-registration.component';
 import { CustomerRegistrationComponent } from './shared/component/customer-registration/customer-registration.component';
 import { HomeComponent } from './home/home.component';
+import { ServicesComponent } from './services/services.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { HomeComponent } from './home/home.component';
     ChooseRegistrationComponent,
     SellerRegistrationComponent,
     CustomerRegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    ServicesComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

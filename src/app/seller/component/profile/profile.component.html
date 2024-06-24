@@ -1,0 +1,47 @@
+<!-- src/app/seller/components/profile/profile.component.html -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center">Profile</h2>
+          <div *ngIf="userData">
+            <div class="row mb-3">
+              <div class="col-md-4"><strong>Full Name:</strong></div>
+              <div class="col-md-8">{{ userData.user.fullName }}</div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4"><strong>Email:</strong></div>
+              <div class="col-md-8">{{ userData.user.email }}</div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4"><strong>Number of Licenses:</strong></div>
+              <div class="col-md-8">{{ userData.seller!.nb_license }}</div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4"><strong>Sex:</strong></div>
+              <div class="col-md-8">{{ userData.seller!.sexe === 'M' ? 'Male' : 'Female' }}</div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4"><strong>Phone:</strong></div>
+              <div class="col-md-8">{{ userData.seller!.phone }}</div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4"><strong>Website:</strong></div>
+              <div class="col-md-8"><a [href]="userData.seller!.site" target="_blank">{{ userData.seller!.site }}</a></div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4"><strong>Profile Image:</strong></div>
+              <div class="col-md-8">
+                <img [src]="userData.seller!.image" class="img-fluid" alt="Profile Image" />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!userData" class="text-center">
+            <p>No profile data available.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

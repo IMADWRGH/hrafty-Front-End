@@ -11,38 +11,32 @@
         name="email"
         placeholder="Enter email"
         formControlName="email"
-        [class.invalid]="
-          loginForm.get('email')?.invalid &&
-          (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
-        "
+        [ngClass]="{
+          'is-invalid': submitted && f['email'].errors
+        }"
       />
-      <span
-        *ngIf="
-          loginForm.get('email')?.hasError('required') &&
-          (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
-        "
-        class="error"
-      >
-        This email is required.
-      </span>
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors['required']">Email is required.</div>
+        <div *ngIf="f['email'].errors['email']">Invalid email format.</div>
+      </div>
     </div>
     <div class="input-container">
       <input
         type="password"
         placeholder="Enter password"
         formControlName="password"
-        [class.invalid]="
-          loginForm.get('password')?.invalid &&
-          (loginForm.get('password')?.dirty ||
-            loginForm.get('password')?.touched)
-        "
+        [ngClass]="{
+          'is-invalid': submitted && f['password'].errors
+        }"
       />
-      <span
-        *ngIf="loginForm.get('password')?.hasError('required')"
-        class="invalid-feedback"
-      >
-        This password is required.
-      </span>
+      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+        <div *ngIf="f['password'].errors['required']">
+          Password is required.
+        </div>
+        <div *ngIf="f['password'].errors['minlength']">
+          Password must be at least 6 characters long.
+        </div>
+      </div>
     </div>
 
     <button type="submit" class="submit">Login</button>

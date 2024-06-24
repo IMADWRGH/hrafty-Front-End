@@ -114,11 +114,21 @@
                   class="form-control"
                   placeholder="Profile Image"
                   formControlName="image"
-                  (change)="onFileChange($event)"
                   [ngClass]="{
                     'is-invalid': submitted && f['image'].errors
                   }"
                 />
+                <!-- <input
+                  type="file"
+                  name="image"
+                  class="form-control"
+                  placeholder="Profile Image"
+                  formControlName="image"
+                  (change)="onFileChange($event)"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['image'].errors
+                  }"
+                /> -->
                 <div
                   *ngIf="submitted && f['image'].errors"
                   class="invalid-feedback"

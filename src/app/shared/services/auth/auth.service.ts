@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Auth } from 'src/app/models/Auth.model';
 import { Customer } from 'src/app/models/Customer.model';
 import { Seller } from 'src/app/models/Seller.model';
@@ -17,8 +17,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<Auth> {
-    return this.http.post<Auth>(`${API_URL}/login`, { email, password })
+  login(email: string, password: string) {
+    return this.http.post<Auth>(`${API_URL}/login`, { email, password },{observe:'response'})
+    .pipe(
+      map((res: HttpResponse<Auth>)=>{
+        console.log(res.body);
+        
+      })
+    
+    );
   }
 
 

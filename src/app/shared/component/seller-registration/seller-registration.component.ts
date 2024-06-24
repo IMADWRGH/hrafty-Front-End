@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { Auth } from 'src/app/models/Auth.model';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { UserStorageService } from '../../services/storage/user-storage.service';
 
 @Component({
   selector: 'app-seller-registration',
@@ -12,8 +15,12 @@ export class SellerRegistrationComponent implements OnInit {
   currentStep: number = 0;
   submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private route: Router,
+    private userDataService: UserStorageService
+  ) { }
   userSignupFormGroup: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     fullName: ['', Validators.required],
@@ -57,9 +64,15 @@ export class SellerRegistrationComponent implements OnInit {
 
     this.authService.registerSeller(payload).subscribe({
       next: data => {
+        this.route.navigate(['/seller'])
         console.log('Seller registered successfully', data);
+        this.userDataService.setUserData(data);
       },
       error: error => {
+        catchError(error)
+        {
+          console.error('Error registering seller:', error);
+        }
         console.log('Error registering seller', error);
       },
       complete: () => {
@@ -73,12 +86,12 @@ export class SellerRegistrationComponent implements OnInit {
     this.userSignupFormGroup.reset();
   }
 
-  onFileChange(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.userSignupFormGroup.patchValue({
-        image: file.name
-      });
-    }
-  }
+  // onFileChange(event: any): void {
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.userSignupFormGroup.patchValue({
+  //       image: file.name
+  //     });
+  //   }
+  // }
 }
