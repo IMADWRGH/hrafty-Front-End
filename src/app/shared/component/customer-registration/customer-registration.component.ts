@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./customer-registration.component.css']
 })
 export class CustomerRegistrationComponent {
+
   currentStep: number = 0;
   submitted: boolean = false;
 
@@ -66,6 +67,16 @@ export class CustomerRegistrationComponent {
   onReset(): void {
     this.submitted = false;
     this.userSignupFormGroup.reset();
+  }
+
+  previous() {
+    this.currentStep--;
+  }
+  next() {
+    this.currentStep++;
+    if (this.userSignupFormGroup.valid) {
+
+    }
   }
 
   onFileChange(event: any): void {

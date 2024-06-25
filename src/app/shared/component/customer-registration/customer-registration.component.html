@@ -3,14 +3,16 @@
     <div
       class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2"
     >
-      <div class="card px-0 pt-4 pb-0">
+      <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
         <h2 id="heading">Sign Up Your User Account</h2>
+        <p>Fill all form field to go to next step</p>
         <form
           id="msform"
           [formGroup]="userSignupFormGroup"
           (ngSubmit)="onSubmit()"
         >
           <br />
+          <!-- fieldsets -->
           <fieldset *ngIf="currentStep === 0">
             <div class="form-card">
               <div class="row">
@@ -85,6 +87,43 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <input
+              type="button"
+              name="next"
+              class="next action-button"
+              value="Next"
+              (click)="next()"
+            />
+          </fieldset>
+          <fieldset *ngIf="currentStep === 1">
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Profile Information:</h2>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fieldlabels">Phone: *</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  class="form-control"
+                  placeholder="Phone Number"
+                  formControlName="phone"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['phone'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f['phone'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['phone'].errors['required']">
+                    Phone Number is required.
+                  </div>
+                </div>
+              </div>
               <div class="form-group">
                 <label class="fieldlabels">Profile Image: *</label>
                 <input
@@ -93,7 +132,6 @@
                   class="form-control"
                   placeholder="Profile Image"
                   formControlName="image"
-                  (change)="onFileChange($event)"
                   [ngClass]="{
                     'is-invalid': submitted && f['image'].errors
                   }"
@@ -129,38 +167,56 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="fieldlabels">Phone: *</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  class="form-control"
-                  placeholder="Phone Number"
-                  formControlName="phone"
-                  [ngClass]="{
-                    'is-invalid': submitted && f['phone'].errors
-                  }"
-                />
-                <div
-                  *ngIf="submitted && f['phone'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['phone'].errors['required']">
-                    Phone Number is required.
-                  </div>
+              <input
+                type="button"
+                name="next"
+                class="next action-button"
+                value="Next"
+                (click)="next()"
+              />
+              <input
+                type="button"
+                name="previous"
+                class="previous action-button-previous"
+                value="Previous"
+                (click)="previous()"
+              />
+            </div>
+          </fieldset>
+          <fieldset *ngIf="currentStep === 2">
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Finish:</h2>
                 </div>
               </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-register p-2">
-                  Register
-                </button>
-                <button
-                  type="button"
-                  (click)="onReset()"
-                  class="mx-4 p-2 btn btn-warning float-right"
-                >
-                  Reset
-                </button>
+              <br /><br />
+              <h2 class="purple-text text-center">
+                <strong>SUCCESS !</strong>
+              </h2>
+              <br />
+              <div class="row justify-content-center">
+                <div class="col-3">
+                  <img
+                    src="https://i.imgur.com/GwStPmg.png"
+                    class="fit-image"
+                  />
+                </div>
+              </div>
+              <br /><br />
+              <div class="row justify-content-center">
+                <div class="col-7 text-center">
+                  <button
+                    type="submit"
+                    id="submit"
+                    class="submit-button"
+                    (click)="next()"
+                  >
+                    <h5 class="purple-text text-center">
+                      You Have Successfully Signed Up Go To your Profile Page
+                    </h5>
+                  </button>
+                </div>
               </div>
             </div>
           </fieldset>

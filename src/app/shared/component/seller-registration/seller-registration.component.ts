@@ -64,7 +64,7 @@ export class SellerRegistrationComponent implements OnInit {
 
     this.authService.registerSeller(payload).subscribe({
       next: data => {
-        this.route.navigate(['/seller'])
+        this.route.navigate(['/login'])
         console.log('Seller registered successfully', data);
         this.userDataService.setUserData(data);
       },
