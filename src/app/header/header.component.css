@@ -121,3 +121,15 @@ nav ul li a:hover::after {
 .btn:hover .arrow:before {
     right: 0;
 }
+
+.navbar .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}

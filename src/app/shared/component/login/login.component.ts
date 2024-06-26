@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from 'src/app/models/Auth.model';
+import { UserStorageService } from '../../services/storage/user-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private service: AuthService
+    private service: AuthService,
+
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -39,23 +41,15 @@ export class LoginComponent implements OnInit {
     this.service.login(this.loginForm.get(['email'])!.value, this.loginForm.get(['password'])!.value).subscribe(
       res => {
         console.log(res);
-
+        this.router.navigateByUrl('home');
+        // if (UserStorageService.isSellerLoggedIn()) {
+        //   console.log("test");
+        //   this.router.navigateByUrl('seller');
+        // } else if (UserStorageService.isCustomerLoggedIn()) {
+        //   console.log("test");
+        //   this.router.navigateByUrl('customer');
+        // }
       }
-      //{
-      // next: (response: Auth) => {
-      //   localStorage.setItem('user', JSON.stringify(response.user));
-      //   if (response.customer) {
-      //     localStorage.setItem('customer', JSON.stringify(response.customer));
-      //     this.router.navigate(['/customer']);
-      //   } else if (response.seller) {
-      //     localStorage.setItem('seller', JSON.stringify(response.seller));
-      //     this.router.navigate(['/seller']);
-      //   }
-      // },
-      // error: (error) => {
-      //   console.error('Invalid email or password', error);
-      // }
-      //  }
     );
   }
 

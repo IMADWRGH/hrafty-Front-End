@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from 'src/app/models/Auth.model';
+import { User } from 'src/app/models/User.model';
 import { UserStorageService } from 'src/app/shared/services/storage/user-storage.service';
 
 @Component({
@@ -7,17 +8,12 @@ import { UserStorageService } from 'src/app/shared/services/storage/user-storage
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit{
-  userData!:Auth;
-  constructor(private data:UserStorageService){}
-  
+export class ProfileComponent implements OnInit {
+  constructor() { }
+  data: Auth;
   ngOnInit(): void {
-    this.data.userData$.subscribe(data => {
-      this.userData = data;
-      console.log(data);
-      
-    });
+    this.data = UserStorageService.getUser();
   }
 
-  
+
 }
