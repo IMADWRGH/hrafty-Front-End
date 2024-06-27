@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-registration',
@@ -12,7 +13,7 @@ export class CustomerRegistrationComponent {
   currentStep: number = 0;
   submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private route: Router) { }
 
   userSignupFormGroup: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -53,6 +54,7 @@ export class CustomerRegistrationComponent {
 
     this.authService.registerCustomer(payload).subscribe({
       next: data => {
+        this.route.navigateByUrl('login');
         console.log('Seller registered successfully', data);
       },
       error: error => {
@@ -73,18 +75,16 @@ export class CustomerRegistrationComponent {
     this.currentStep--;
   }
   next() {
-    this.currentStep++;
-    if (this.userSignupFormGroup.valid) {
+    this.submitted = true;
 
+
+    if (this.currentStep == 0 && this.userSignupFormGroup.value.password && this.userSignupFormGroup.value.email && this.userSignupFormGroup.value.fullName) {
+      console.log("test");
+      this.currentStep++;
+      this.submitted = false;
     }
   }
 
-  onFileChange(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.userSignupFormGroup.patchValue({
-        image: file.name
-      });
-    }
-  }
+
+
 }

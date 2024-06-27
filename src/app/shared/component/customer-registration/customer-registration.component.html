@@ -168,11 +168,10 @@
                 </div>
               </div>
               <input
-                type="button"
+                type="submit"
                 name="next"
                 class="next action-button"
-                value="Next"
-                (click)="next()"
+                value="Submit"
               />
               <input
                 type="button"
@@ -181,43 +180,6 @@
                 value="Previous"
                 (click)="previous()"
               />
-            </div>
-          </fieldset>
-          <fieldset *ngIf="currentStep === 2">
-            <div class="form-card">
-              <div class="row">
-                <div class="col-7">
-                  <h2 class="fs-title">Finish:</h2>
-                </div>
-              </div>
-              <br /><br />
-              <h2 class="purple-text text-center">
-                <strong>SUCCESS !</strong>
-              </h2>
-              <br />
-              <div class="row justify-content-center">
-                <div class="col-3">
-                  <img
-                    src="https://i.imgur.com/GwStPmg.png"
-                    class="fit-image"
-                  />
-                </div>
-              </div>
-              <br /><br />
-              <div class="row justify-content-center">
-                <div class="col-7 text-center">
-                  <button
-                    type="submit"
-                    id="submit"
-                    class="submit-button"
-                    (click)="next()"
-                  >
-                    <h5 class="purple-text text-center">
-                      You Have Successfully Signed Up Go To your Profile Page
-                    </h5>
-                  </button>
-                </div>
-              </div>
             </div>
           </fieldset>
         </form>

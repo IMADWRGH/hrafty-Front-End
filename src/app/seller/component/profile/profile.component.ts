@@ -8,7 +8,7 @@ import { UserStorageService } from 'src/app/shared/services/storage/user-storage
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent  {
   constructor() { }
   data: Auth;
   ngOnInit(): void {

@@ -8,7 +8,7 @@ import { UserStorageService } from 'src/app/shared/services/storage/user-storage
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css']
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent  {
 
   services: Service[];
   data = UserStorageService.getUser();

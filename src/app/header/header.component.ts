@@ -10,8 +10,8 @@ import { UserStorageService } from '../shared/services/storage/user-storage.serv
 export class HeaderComponent {
   constructor(private route: Router) { }
 
-  isCustomerLoggedIn: boolean = UserStorageService.isCustomerLoggedIn();
-  isSellerLoggedIn: boolean = UserStorageService.isSellerLoggedIn();
+  isCustomerLoggedIn: boolean
+  isSellerLoggedIn: boolean 
 
   ngOnInit(): void {
     this.route.events.subscribe(event => {

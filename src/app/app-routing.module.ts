@@ -7,6 +7,8 @@ import { SellerRegistrationComponent } from './shared/component/seller-registrat
 import { CustomerRegistrationComponent } from './shared/component/customer-registration/customer-registration.component';
 import { ServicesComponent } from './services/services.component';
 import { ProductsComponent } from './products/products.component';
+import { SellerAuthGuard } from './shared/services/authGuard/seller-auth-guard.guard';
+import { CustomerAuthGuard } from './shared/services/authGuard/customer-auth-guard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', title: 'Home - page' },
@@ -20,9 +22,11 @@ const routes: Routes = [
   {
     path: 'seller',
     loadChildren: () =>
-      import('./seller/seller.module').then(m => m.SellerModule)
+      import('./seller/seller.module').then(m => m.SellerModule), canActivate: [SellerAuthGuard]
   },
-  { path: 'customer', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) }];
+  { path: 'customer', loadChildren: () =>
+    import('./customer/customer.module').then(m => m.CustomerModule) ,canActivate: [CustomerAuthGuard]
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

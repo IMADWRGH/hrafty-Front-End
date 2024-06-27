@@ -19,13 +19,17 @@ export class AuthService {
 
   constructor(private http: HttpClient, private userStorage: UserStorageService) { }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<void> {
     return this.http.post<Auth>(`${API_URL}/login`, { email, password }, { observe: 'response' })
       .pipe(
         map((res: HttpResponse<any>) => {
-          console.log(res.body!.user);
-          this.userStorage.saveUser(res.body);
-
+          const authResponse: any = res.body!;
+          if (authResponse && authResponse.token && authResponse.auth) {
+            this.userStorage.saveUser(authResponse.auth);
+            this.userStorage.saveToken(authResponse.token);
+          } else {
+            throw new Error('Invalid server response');
+          }
         })
       );
   }

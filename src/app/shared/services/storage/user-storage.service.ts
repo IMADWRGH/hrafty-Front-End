@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Auth } from 'src/app/models/Auth.model';
 import { User } from 'src/app/models/User.model';
 
-const USER = 'User';
-const Token = 'Token';
+const USER_KEY = 'User';
+const TOKEN_KEY = 'Token';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,21 +12,22 @@ export class UserStorageService {
   constructor() { }
 
   saveToken(token: string): void {
-    window.localStorage.removeItem(Token);
-    window.localStorage.setItem(Token, token);
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.setItem(TOKEN_KEY, token);
   }
 
-  static getToken(): string {
-    return localStorage.getItem(Token);
+  static getToken(): string | null {
+    return localStorage.getItem(TOKEN_KEY);
   }
 
-  saveUser(user: User): void {
-    window.localStorage.removeItem(USER);
-    window.localStorage.setItem(USER, JSON.stringify(user));
+  saveUser(user: User): void { 
+    localStorage.removeItem(USER_KEY);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  static getUser(): Auth {
-    return JSON.parse(localStorage.getItem(USER));
+  static getUser(): Auth | null {
+    const userJson = localStorage.getItem(USER_KEY);
+    return userJson ? JSON.parse(userJson) : null;
   }
 
   static getUserId(): number {
@@ -46,7 +47,7 @@ export class UserStorageService {
   }
 
   static isSellerLoggedIn(): boolean {
-    if (!this.getToken() === null) {
+    if (this.getToken() === null) {
       return false;
     }
     const role: string = this.getUserRole();
@@ -54,16 +55,17 @@ export class UserStorageService {
   }
 
   static isCustomerLoggedIn(): boolean {
-    if (!this.getToken() === null) {
+    if (this.getToken() === null) {
       return false;
     }
     const role: string = this.getUserRole();
     return role == 'CUSTOMER';
   }
 
+
   static signOut(): void {
-    window.localStorage.removeItem(Token);
-    window.localStorage.removeItem(USER);
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
   }
 }
 
