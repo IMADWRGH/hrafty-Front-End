@@ -16,31 +16,19 @@ export class AddServiceComponent {
   inputdata: any;
   newService: Service;
   editService: Service;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: ServiceService, private fb: FormBuilder, private ref: MatDialogRef<AddServiceComponent>, private serviceImpl: ServiceService) {
-  }
+  isEditMode: boolean = false;
   serviceForm?: FormGroup;
 
-
-  onSubmit(): void {
-    const serviceData = {
-      ...this.serviceForm.value,
-      sellerId: this.sellerId
-    };
-    console.log(serviceData);
-
-    this.service.addService(serviceData).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.closepopup()
-      }
-    });
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: ServiceService, private fb: FormBuilder, private ref: MatDialogRef<AddServiceComponent>, private serviceImpl: ServiceService) {
   }
+
   ngOnInit(): void {
     this.inputdata = this.data;
     if (this.inputdata.id > 0) {
       this.setpopudate(this.inputdata.id);
     }
     this.serviceForm = this.fb.group({
+      id: [null],
       image: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -48,10 +36,32 @@ export class AddServiceComponent {
       type: ['', Validators.required],
       status: [false]
     });
-    this.inputdata = this.data;
+    if (this.inputdata && this.inputdata.service) {
+      this.isEditMode = true;
+      this.serviceForm.patchValue(this.inputdata.service);
+    }
   }
 
+  onSubmit(): void {
+    const serviceData = {
+      ...this.serviceForm.value,
+      sellerId: this.sellerId
+    };
 
+    if (this.isEditMode) {
+      this.service.updateService(serviceData).subscribe({
+        next: (res) => {
+          this.closepopup();
+        }
+      });
+    } else {
+      this.service.addService(serviceData).subscribe({
+        next: (res) => {
+          this.closepopup();
+        }
+      });
+    }
+  }
 
   closepopup() {
     this.ref.close('Closed using function');
@@ -62,6 +72,7 @@ export class AddServiceComponent {
       next: (res) => {
         this.editService = res;
         this.serviceForm.setValue({
+          id: this.editService.id,
           image: this.editService.image,
           name: this.editService.name,
           description: this.editService.description,
@@ -70,26 +81,6 @@ export class AddServiceComponent {
           status: this.editService.status
         });
       }
-
-    })
+    });
   }
-
-  setpopupdatedata(id: number) {
-    this.serviceImpl.getService(id).subscribe({
-      next: (res) => {
-        this.editService = res;
-        this.serviceForm.setValue({
-          name: this.editService.name,
-          description: this.editService.description,
-          type: this.editService.type,
-          price: this.editService.price,
-          status: this.editService.status,
-        })
-      },
-      error: (err) => {
-        console.log("error in setpopupdatedata");
-      }
-    })
-  }
-
 }
