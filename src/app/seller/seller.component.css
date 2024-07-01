@@ -1,0 +1,26 @@
+.full-screen-container {
+    height: 100vh;
+}
+
+.full-screen-drawer {
+    width: 200px;
+    max-width: 80%;
+}
+
+button {
+    margin: 15px;
+    padding: 1rem;
+}
+
+hr {
+    width: 50%;
+    margin: auto;
+
+
+}
+.logo {
+    font-size: 35px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 10px;
+}

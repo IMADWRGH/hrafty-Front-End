@@ -3,7 +3,8 @@ export interface Service {
     name: string;
     description: string;
     image: string;
-    price: never;
+    price: number;
     type: string;
-    status: bigint;
+    status: boolean;
+    sellerId: number;
 }

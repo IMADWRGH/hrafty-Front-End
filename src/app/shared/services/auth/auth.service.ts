@@ -24,8 +24,8 @@ export class AuthService {
       .pipe(
         map((res: HttpResponse<any>) => {
           const authResponse: any = res.body!;
-          if (authResponse && authResponse.token && authResponse.auth) {
-            this.userStorage.saveUser(authResponse.auth);
+          if (authResponse && authResponse.token && authResponse.user) {
+            this.userStorage.saveUser(authResponse.user);
             this.userStorage.saveToken(authResponse.token);
           } else {
             throw new Error('Invalid server response');

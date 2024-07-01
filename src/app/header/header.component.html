@@ -140,7 +140,11 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <img src="" class="profile-image" alt="User Image" />
+                <img
+                  src="/assets/images/img1.jpg"
+                  class="profile-image"
+                  alt="User Image"
+                />
                 <span class="ms-2">customer</span>
               </a>
               <ul
@@ -190,7 +194,7 @@
               class="nav-link"
               aria-current="page"
               routerLinkActive="active-link"
-              routerLink="seller/services"
+              routerLink="services"
               >Servise</a
             >
           </li>
@@ -199,42 +203,45 @@
               class="nav-link"
               aria-current="page"
               routerLinkActive="active-link"
-              routerLink="seller/products"
+              routerLink="products"
               >Products</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLinkActive="active-link"
+              routerLink="contact"
+              >contact</a
             >
           </li>
         </ul>
         <div>
           <ul class="nav justify-content-end">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle d-flex align-items-center"
-                href="#"
-                id="navbarDropdownMenuLink"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <li class="nav-item">
+              <button
+                mat-button
+                [matMenuTriggerFor]="userMenu"
+                class="nav-link d-flex align-items-center"
               >
-                <img src="" class="profile-image" alt="User Image" />
-                <span class="ms-2">Seller</span>
-              </a>
-              <ul
-                class="dropdown-menu"
-                aria-labelledby="navbarDropdownMenuLink"
-              >
-                <li>
-                  <a class="dropdown-item" routerLink="seller/profile"
-                    >Profile</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" routerLink="seller/dashboard"
-                    >Dashboard</a
-                  >
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
-              </ul>
+                <img
+                  src="/assets/images/img1.jpg"
+                  class="profile-image"
+                  alt="User Image"
+                />
+                <span class="ms-2">{{ user.fullName }}</span>
+              </button>
+              <mat-menu #userMenu="matMenu">
+                <button mat-menu-item [routerLink]="['/seller/profile']">
+                  Profile
+                </button>
+                <!-- <button mat-menu-item [routerLink]="['/ashboard']">
+        Dashboard
+      </button> -->
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="logOut()">Logout</button>
+              </mat-menu>
             </li>
           </ul>
         </div>

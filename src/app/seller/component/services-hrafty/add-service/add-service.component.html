@@ -1,0 +1,43 @@
+<form [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="form-container">
+  <h1 mat-dialog-title>{{ inputdata.title }}</h1>
+  <div mat-dialog-content class="form-content">
+    <mat-form-field appearance="fill">
+      <mat-label>Image</mat-label>
+      <input
+        formControlName="image"
+        matInput
+        placeholder="Example image"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput placeholder="Enter service name" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <input formControlName="type" matInput placeholder="Enter service type" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput placeholder="Enter price" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        formControlName="description"
+        matInput
+        placeholder="Enter description"
+        rows="5"
+      ></textarea>
+    </mat-form-field>
+    <div class="full-width checkbox-container">
+      <mat-checkbox formControlName="status">Is Active</mat-checkbox>
+    </div>
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button type="submit" color="primary">Save</button>
+    <button type="button" mat-raised-button color="warn" (click)="closepopup()">
+      Close
+    </button>
+  </div>
+</form>

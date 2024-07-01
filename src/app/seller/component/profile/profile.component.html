@@ -1,114 +1,134 @@
-<div class="container rounded bg-white mt-5 mb-5">
-  <div class="row">
-    <div class="col-md-3 border-right">
-      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-        <img
-          class="rounded-circle mt-5"
-          width="150px"
-          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-        /><span class="font-weight-bold">{{ data.user.fullName }}</span
-        ><span class="text-black-50">{{ data.user.email }}</span
-        ><span> </span>
-      </div>
-    </div>
-    <div class="col-md-5 border-right">
-      <div class="p-3 py-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="text-right">Profile Settings</h4>
-        </div>
-        <div class="row mt-2">
-          <div class="col-md-6">
-            <label class="labels">Full Name</label
-            ><input
-              type="text"
-              class="form-control"
-              placeholder="first name"
-              [value]="data.user.fullName"
-            />
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-danger text-white">
+            <h4 class="card-title">User Profile</h4>
+          </div>
+          <div class="card-body" *ngIf="seller">
+            <form>
+              <div class="row mb-3">
+                <div class="col-md-5">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="My site"
+                      [value]="seller.site"
+                    />
+                    <label for="firstName">My site</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="fullName"
+                      [value]="user.fullName"
+                    />
+                    <label for="username">Full Name</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Email address"
+                      [value]="user.email"
+                    />
+                    <label for="email">Email address</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="First Name"
+                      [value]="seller.nb_license"
+                    />
+                    <label for="firstName">Number of license</label>
+                  </div>
+                </div>
+                <!-- <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="Last Name"
+                    />
+                    <label for="lastName">Last Name</label>
+                  </div>
+                </div> -->
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="address"
+                      placeholder="Address"
+                      [value]="address.street"
+                    />
+                    <label for="address">Address</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="city"
+                      placeholder="City"
+                      [value]="address.name_city"
+                    />
+                    <label for="city">City</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="country"
+                      placeholder="Country"
+                      [value]="address.name_regional"
+                    />
+                    <label for="country">Regional</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="postalCode"
+                      placeholder="Postal Code"
+                      [value]="address.shop_number"
+                    />
+                    <label for="postalCode">Shop Number</label>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-warning float-end">
+                Update Profile
+              </button>
+              <div class="clearfix"></div>
+            </form>
           </div>
         </div>
-        <div class="row mt-3">
-          <div class="col-md-12">
-            <label class="labels">Mobile Number</label
-            ><input
-              type="text"
-              class="form-control"
-              placeholder="enter phone number"
-              [value]="data.seller.phone"
-            />
-          </div>
-          <div class="col-md-12">
-            <label class="labels">Number Of Shop</label
-            ><input
-              type="text"
-              class="form-control"
-              [value]="data.seller.addressId.shop_number"
-            />
-          </div>
-          <div class="col-md-12">
-            <label class="labels">Street</label
-            ><input
-              type="text"
-              class="form-control"
-              [value]="data.seller.addressId?.street"
-            />
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-6">
-            <label class="labels">City</label
-            ><input
-              type="text"
-              class="form-control"
-              [value]="data.seller.addressId.name_city"
-            />
-          </div>
-          <div class="col-md-6">
-            <label class="labels">Regionl</label
-            ><input
-              type="text"
-              class="form-control"
-              [value]="data.seller.addressId.name_regional"
-            />
-          </div>
-        </div>
-        <div class="mt-5 text-center">
-          <button class="btn btn-primary profile-button" type="button">
-            Save Profile
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="p-3 py-5">
-        <div
-          class="d-flex justify-content-between align-items-center experience"
-        >
-          <span>Services</span
-          ><span class="border px-3 p-1 add-experience"
-            ><i class="fa fa-plus"></i>&nbsp;Show</span
-          >
-        </div>
-        <br />
-        <div class="col-md-12">
-          <label class="labels">Number of licence</label
-          ><input
-            type="text"
-            class="form-control"
-            placeholder="experience"
-            [value]="data.seller.nb_license"
-          />
-        </div>
-        <br />
-        <!-- <div class="col-md-12">
-          <label class="labels">Additional Details</label
-          ><input
-            type="text"
-            class="form-control"
-            placeholder="additional details"
-            value=""
-          />
-        </div> -->
       </div>
     </div>
   </div>

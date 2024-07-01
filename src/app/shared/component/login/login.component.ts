@@ -41,14 +41,14 @@ export class LoginComponent implements OnInit {
     this.service.login(this.loginForm.get(['email'])!.value, this.loginForm.get(['password'])!.value).subscribe(
       res => {
         console.log(res);
-        this.router.navigateByUrl('home');
-        // if (UserStorageService.isSellerLoggedIn()) {
-        //   console.log("test");
-        //   this.router.navigateByUrl('seller');
-        // } else if (UserStorageService.isCustomerLoggedIn()) {
-        //   console.log("test");
-        //   this.router.navigateByUrl('customer');
-        // }
+        
+        if (UserStorageService.isSellerLoggedIn()) {
+          console.log("test");
+          this.router.navigateByUrl('seller');
+        } else if (UserStorageService.isCustomerLoggedIn()) {
+          console.log("test");
+          this.router.navigateByUrl('customer');
+        }
       }
     );
   }

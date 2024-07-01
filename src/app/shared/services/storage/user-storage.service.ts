@@ -25,25 +25,25 @@ export class UserStorageService {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  static getUser(): Auth | null {
+  static getUser(): User | null {
     const userJson = localStorage.getItem(USER_KEY);
     return userJson ? JSON.parse(userJson) : null;
   }
 
   static getUserId(): number {
-    const data = this.getUser();
-    if (data === null) {
+    const user = this.getUser();
+    if (user === null) {
       return 0;
     }
-    return data.user.id;
+    return user.id;
   }
 
   static getUserRole(): string {
-    const data = this.getUser();
-    if (data === null) {
+    const user = this.getUser();
+    if (user === null) {
       return '';
     }
-    return data.user.role;
+    return user.role;
   }
 
   static isSellerLoggedIn(): boolean {

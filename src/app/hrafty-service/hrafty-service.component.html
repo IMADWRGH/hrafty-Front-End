@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3 mb-4" *ngFor="let service of serviceList">
+      <mat-card class="shadow-card">
+        <!-- <img
+          mat-card-image
+          [src]="service.image"
+          alt="{{ service.description }}"
+        /> -->
+        <img src="/assets/images/image2.jfif" alt="" />
+        <mat-card-content class="mt-3">
+          <div>
+            <h3>{{ service.name }}</h3>
+            <p>Price: {{ service.price }}</p>
+            <div class="rating">
+              <!-- <mat-icon *ngFor="let star of service.stars">star</mat-icon> -->
+              <!-- <mat-icon *ngFor="let star of product.emptyStars">star_border</mat-icon> -->
+            </div>
+            <!-- <p class="discount">{{ product.discount }}% off</p>
+            <p class="shipping">{{ product.shipping }}</p> -->
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

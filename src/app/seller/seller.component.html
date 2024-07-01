@@ -1,4 +1,32 @@
-<app-seller-dashboard></app-seller-dashboard>
-<div class="content flex-grow-1 p-3">
+<mat-drawer-container class="full-screen-container">
+  <mat-drawer #drawer opened mode="side" class="full-screen-drawer">
+    <h1 class="logo">Hrafty</h1>
+    <hr />
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-button routerLink="/dashboard">
+          <mat-icon>dashboard</mat-icon> Dashboard
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/seller/profile">
+          <mat-icon>person</mat-icon> User Profile
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/seller/list-services">
+          <mat-icon>view_headline</mat-icon> List Services
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/seller/products">
+          <mat-icon>view_headline</mat-icon> List Product
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content class="content">
     <router-outlet></router-outlet>
-  </div>
+  </mat-drawer-content>
+</mat-drawer-container>

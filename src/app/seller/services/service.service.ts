@@ -10,9 +10,23 @@ const API_URL = "http://localhost:8080/api/v1/seller/";
 })
 export class ServiceService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getServices(id:number):Observable<Service>{
-    return this.http.get<Service>(API_URL +"getAll/"+id);
+  getServices(id: number): Observable<Service[]> {
+    return this.http.get<Service[]>(API_URL + "getAll/" + id);
+  }
+  getService(id: number): Observable<Service> {
+    return this.http.get<Service>(API_URL + "get/" + id);
+  }
+
+  addService(service: Service): Observable<Service> {
+    return this.http.post<Service>(API_URL + "add", service);
+  }
+
+  deleteService(id:number){
+    return this.http.delete(API_URL + "delete/" + id);
+  }
+  updateService(id:number){
+    return this.http.put(API_URL + "update/" + id, id);
   }
 }
