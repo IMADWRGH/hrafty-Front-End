@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SellerComponent } from './seller.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { ProductsComponent } from './component/products/products.component';
 import { ListServicesComponent } from './component/services-hrafty/list-services/list-services.component';
 import { AddServiceComponent } from './component/services-hrafty/add-service/add-service.component';
+import { ListProductComponent } from './component/product-hrafty/list-product/list-product.component';
 
 const routes: Routes = [
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: SellerComponent, title: 'Seller - Dashboard' },
       { path: 'profile', component: ProfileComponent, title: 'Seller - Profile' },
-      { path: 'products', component: ProductsComponent, title: 'Seller - Products' },
+      { path: 'products', component: ListProductComponent, title: 'Seller - Products' },
       { path: 'list-services', component: ListServicesComponent, title: 'Seller - Services list' },
       { path: 'services', component: AddServiceComponent, title: 'Seller - New service' }
     ]
