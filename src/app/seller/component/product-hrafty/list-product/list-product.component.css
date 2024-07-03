@@ -1,0 +1,13 @@
+mat-card {
+    margin: 2%;
+}
+
+button {
+    margin: 2px;
+}
+
+.btn-add {
+    margin-top: auto;
+    margin-left: 60%;
+    margin-bottom: 15px;
+}

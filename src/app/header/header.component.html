@@ -47,7 +47,8 @@
               class="nav-link"
               aria-current="page"
               routerLinkActive="active-link"
-              >contact</a
+              routerLink="contact"
+              >Contact</a
             >
           </li>
         </ul>
@@ -230,7 +231,9 @@
                   class="profile-image"
                   alt="User Image"
                 />
-                <span class="ms-2">{{ user.fullName }}</span>
+                <span class="ms-2" style="color: white">{{
+                  user.fullName
+                }}</span>
               </button>
               <mat-menu #userMenu="matMenu">
                 <button mat-menu-item [routerLink]="['/seller/profile']">

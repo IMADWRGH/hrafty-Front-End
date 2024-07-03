@@ -1,1 +1,36 @@
-<p>add-product works!</p>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="form-container">
+  <h1 mat-dialog-title>{{ inputdata.title }}</h1>
+  <div mat-dialog-content class="form-content">
+    <mat-form-field appearance="fill">
+      <mat-label>Image</mat-label>
+      <input
+        formControlName="name"
+        matInput
+        placeholder="Enter product image"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput placeholder="Enter product name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput placeholder="Enter price" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        formControlName="description"
+        matInput
+        placeholder="Enter description"
+        rows="5"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button type="submit" color="primary">Save</button>
+    <button type="button" mat-raised-button color="warn" (click)="closepopup()">
+      Close
+    </button>
+  </div>
+</form>

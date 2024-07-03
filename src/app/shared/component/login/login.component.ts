@@ -46,6 +46,9 @@ export class LoginComponent implements OnInit {
         } else if (UserStorageService.isCustomerLoggedIn()) {
           this.router.navigateByUrl('customer');
         }
+      },
+      err => {
+        console.log(err);
       }
     );
   }

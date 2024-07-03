@@ -1,8 +1,12 @@
 <mat-card>
   <mat-card-header>
-    <!-- <mat-form-field>
-      <input matInput (keyup)="Filterchange($event) " placeholder="Enter the text" />
-    </mat-form-field> -->
+    <mat-form-field class="filter">
+      <input
+        matInput
+        (keyup)="Filterchange($event)"
+        placeholder="Enter the text"
+      />
+    </mat-form-field>
     <button
       class="btn-add"
       (click)="addService()"
