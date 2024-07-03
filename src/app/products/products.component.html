@@ -1,40 +1,42 @@
-<div class="container mt-4">
+<div class="container">
+   <div class="filters">
+    <a class="button text-decoration-none" routerLink="/catalog/Heads">Heads</a>
+    <a class="button text-decoration-none" routerLink="/catalog/Arms">Arms</a>
+    <a class="button text-decoration-none" routerLink="/catalog/Torsos">Torsos</a>
+    <a class="button text-decoration-none" routerLink="/catalog/Bases">Bases</a>
+    <a class="button text-decoration-none" routerLink="['/catalog','']">All</a>
+  </div>
   <div class="row">
-    <div class="col-md-6 mb-4">
-      <mat-card class="shadow-card">
-        <img mat-card-image src="" alt="Image description 1" />
-        <mat-card-content class="mt-3">
-          <div>
-            <h3>Product Name 1</h3>
-            <p>Price: $99.99</p>
-            <div class="rating">
-              <mat-icon>star</mat-icon>
-              <mat-icon>star</mat-icon>
-              <mat-icon>star</mat-icon>
-              <mat-icon>star</mat-icon>
-              <mat-icon>star_border</mat-icon>
-            </div>
+    <div class="col-lg-3 col-md-4 mb-3">
+      <div class="product-box">
+        <div class="product-inner-box position-relative">
+          <div class="icons position-absolute">
+            <a href="" class="text-decoration-none"
+              ><i class="bi bi-heart-fill"></i
+            ></a>
+            <a href="" class="text-decoration-none"
+              ><i class="bi bi-eye"></i
+            ></a>
           </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="col-md-6 mb-4">
-      <mat-card class="shadow-card">
-        <img mat-card-image src="" alt="Image description 2" />
-        <mat-card-content class="mt-3">
-          <div>
-            <h3>Product Name 2</h3>
-            <p>Price: $89.99</p>
-            <div class="rating">
-              <mat-icon>star</mat-icon>
-              <mat-icon>star</mat-icon>
-              <mat-icon>star</mat-icon>
-              <mat-icon>star_border</mat-icon>
-              <mat-icon>star_border</mat-icon>
-            </div>
+          <div class="onsale">
+            <span class="badge rounded-0"
+              ><i class="bi bi-arrow-down"></i>29%</span
+            >
           </div>
-        </mat-card-content>
-      </mat-card>
+          <img src="/assets/images/img1.jpg" class="img-fluid box-shadow" alt="" />
+          <div class="cart-btn">
+            <button class="btn btn-white shadow-sm rounded-pill">
+              <i class="bi bi-cart-plus-fill"></i> Add to cart
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">
+            <h3>Woodan chair</h3>
+          </div>
+          <div class="product-price">$ <span>25</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
