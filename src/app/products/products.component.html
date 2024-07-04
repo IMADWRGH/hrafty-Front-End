@@ -1,40 +1,73 @@
 <div class="container">
-   <div class="filters">
-    <a class="button text-decoration-none" routerLink="/catalog/Heads">Heads</a>
-    <a class="button text-decoration-none" routerLink="/catalog/Arms">Arms</a>
-    <a class="button text-decoration-none" routerLink="/catalog/Torsos">Torsos</a>
-    <a class="button text-decoration-none" routerLink="/catalog/Bases">Bases</a>
-    <a class="button text-decoration-none" routerLink="['/catalog','']">All</a>
-  </div>
   <div class="row">
-    <div class="col-lg-3 col-md-4 mb-3">
-      <div class="product-box">
-        <div class="product-inner-box position-relative">
-          <div class="icons position-absolute">
-            <a href="" class="text-decoration-none"
-              ><i class="bi bi-heart-fill"></i
-            ></a>
-            <a href="" class="text-decoration-none"
-              ><i class="bi bi-eye"></i
-            ></a>
-          </div>
-          <div class="onsale">
-            <span class="badge rounded-0"
-              ><i class="bi bi-arrow-down"></i>29%</span
-            >
-          </div>
-          <img src="/assets/images/img1.jpg" class="img-fluid box-shadow" alt="" />
-          <div class="cart-btn">
-            <button class="btn btn-white shadow-sm rounded-pill">
-              <i class="bi bi-cart-plus-fill"></i> Add to cart
-            </button>
+    <div class="col-md-3 col-sm-6">
+      <div class="product-grid s">
+        <div class="product-image">
+          <a href="#" class="image">
+            <img class="pic-1" src="/assets/images/img1.jpg" />
+            <img class="pic-2" src="/assets/images/img1.jpg" />
+          </a>
+          <!-- <span class="product-sale-label">sale!</span> -->
+          <ul class="social">
+            <li>
+              <a href="#" data-tip="Quick View">
+                <i class="bi bi-eye"></i></a>
+            </li>
+            <li>
+              <a href="#" data-tip="Add to wishlist"
+                ><i class="bi bi-suit-heart-fill"></i
+              ></a>
+            </li>
+          </ul>
+          <div class="product-rating">
+            <ul class="rating">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star"></i>
+              <i class="bi bi-star"></i>
+            </ul>
+            <a class="add-to-cart" href="#"> ADD TO CART </a>
           </div>
         </div>
-        <div class="product-info">
-          <div class="product-name">
-            <h3>Woodan chair</h3>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Men's Shirt</a></h3>
+          <!-- <div class="price"><span>$28.00</span>$20.00</div> -->
+           <div class="price">$20.00</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#" class="image">
+            <img class="pic-1" src="/assets/images/img1.jpg" />
+            <img class="pic-2" src="/assets/images/img1.jpg" />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="#" data-tip="Quick View"><i class="bi bi-eye"></i></a>
+            </li>
+            <li>
+              <a href="#" data-tip="Add to wishlist"
+                ><i class="bi bi-suit-heart-fill"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="product-rating">
+            <ul class="rating">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star"></i>
+              <i class="bi bi-star"></i>
+            </ul>
+            <a class="add-to-cart" href="#"> ADD TO CART </a>
           </div>
-          <div class="product-price">$ <span>25</span></div>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Women's Tshirt</a></h3>
+          <div class="price">$19.00</div>
         </div>
       </div>
     </div>

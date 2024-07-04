@@ -11,29 +11,33 @@ import { Address } from 'src/app/models/Address.model';
 
 })
 export class ProfileComponent {
-  constructor(private data: SellerService) { }
-  user = UserStorageService.getUser()
-  seller: Seller ;
-  address:Address;
+  constructor(private sellerService: SellerService) { }
+  userId = UserStorageService.getUserId()
+  user=UserStorageService.getUser();
+  seller?: Seller ;
+  address?:Address;
 
   ngOnInit(): void {
-    this.getData();
-  }
-  getData() {
-    this.data.getAddressSeller(this.user.id).subscribe((data: Seller) => {
-      this.address=data;
-      console.log(data);
-    })
-    this.data.getSellerData(this.user.id).subscribe((data) => {
-      this.seller = data;
-      console.log(this.seller.nb_license);
-     
-      
-
-    })
+    this.getSeller();
   }
 
 
-
-
+  getSeller() {
+    this.sellerService.getSellerData(this.userId).subscribe(
+      (data: Seller) => {
+        this.seller = data;
+        this.sellerService.getAddressSeller(this.seller.id).subscribe(
+          (data: Address) => {
+            this.address = data;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

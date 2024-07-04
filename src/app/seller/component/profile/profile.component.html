@@ -16,7 +16,7 @@
                       class="form-control"
                       id="firstName"
                       placeholder="My site"
-                      [value]="seller.site"
+                      [value]="seller?.site"
                     />
                     <label for="firstName">My site</label>
                   </div>
@@ -27,7 +27,7 @@
                       type="text"
                       class="form-control"
                       id="fullName"
-                      [value]="user.fullName"
+                      [value]="user?.fullName"
                     />
                     <label for="username">Full Name</label>
                   </div>
@@ -39,7 +39,7 @@
                       class="form-control"
                       id="email"
                       placeholder="Email address"
-                      [value]="user.email"
+                      [value]="user?.email"
                     />
                     <label for="email">Email address</label>
                   </div>
@@ -53,7 +53,7 @@
                       class="form-control"
                       id="firstName"
                       placeholder="First Name"
-                      [value]="seller.nb_license"
+                      [value]="seller?.nb_license"
                     />
                     <label for="firstName">Number of license</label>
                   </div>
@@ -78,7 +78,7 @@
                       class="form-control"
                       id="address"
                       placeholder="Address"
-                      [value]="address.street"
+                      [value]="address?.street"
                     />
                     <label for="address">Address</label>
                   </div>
@@ -92,7 +92,7 @@
                       class="form-control"
                       id="city"
                       placeholder="City"
-                      [value]="address.name_city"
+                      [value]="address?.name_city"
                     />
                     <label for="city">City</label>
                   </div>
@@ -104,7 +104,7 @@
                       class="form-control"
                       id="country"
                       placeholder="Country"
-                      [value]="address.name_regional"
+                      [value]="address?.name_regional"
                     />
                     <label for="country">Regional</label>
                   </div>
@@ -116,7 +116,7 @@
                       class="form-control"
                       id="postalCode"
                       placeholder="Postal Code"
-                      [value]="address.shop_number"
+                      [value]="address?.shop_number"
                     />
                     <label for="postalCode">Shop Number</label>
                   </div>

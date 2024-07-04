@@ -1,84 +1,104 @@
 .container {
+    margin-top: 20px;
+    height: 100vh;
+}
+
+
+.btn-theme {
+    background-color: #5369f8;
+    border-color: #5369f8;
+    color: #fff;
+}
+
+.account-block {
+    padding: 0;
     background-image: url("/assets/images/image2.jfif");
-    min-height: 100%;
-    min-width: 100%;
-    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
-}
-
-.form {
-    background: rgba(255, 255, 255, 0.14);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    display: block;
-    padding: 1rem;
-    max-width: 350px;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.error {
-    color: red;
-}
-
-.form-title {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-    text-align: center;
-    color: #000;
-}
-
-.input-container {
+    background-size: cover;
+    height: 100%;
     position: relative;
 }
 
-.input-container input,
-.form button {
-    outline: none;
-    border: 1px solid #e5e7eb;
-    margin: 8px 0;
+.account-block .overlay {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-.input-container input {
-    background-color: #fff;
-    padding: 1rem;
-    padding-right: 3rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    width: 300px;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-
-.submit {
-    display: block;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    background-color: #4F46E5;
-    color: #191717;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 500;
-    width: 100%;
-    border-radius: 0.5rem;
-    text-transform: uppercase;
-}
-
-.signup-link {
-    color: #ffffff;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+.account-block .account-testimonial {
     text-align: center;
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    padding: 0 1.75rem;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
 }
 
-.signup-link a {
-    text-decoration: underline;
+.text-theme {
+    color: #5369f8 !important;
+}
+
+.btn-theme {
+    background-color: #5369f8;
+    border-color: #5369f8;
+    color: #fff;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.float-right {
+    float: right;
+}
+
+.text-primary {
+    color: #007bff;
+}
+
+.rounded-right {
+    border-radius: 0 10px 10px 0;
+}
+
+.mb-5 {
+    margin-bottom: 3rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.h4,
+.h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.account-testimonial {
+    width: 90%;
+    margin: auto;
+    padding: 15px;
+    background: rgba(251, 163, 163, 0.11);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.9px);
+    -webkit-backdrop-filter: blur(1.9px);
 }
