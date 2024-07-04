@@ -1,7 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Seller } from 'src/app/models/Seller.model';
 import { Service } from 'src/app/models/Service.model';
+import { SellerService } from 'src/app/seller/services/seller.service';
 import { ServiceService } from 'src/app/seller/services/service.service';
 import { UserStorageService } from 'src/app/shared/services/storage/user-storage.service';
 
@@ -10,17 +12,22 @@ import { UserStorageService } from 'src/app/shared/services/storage/user-storage
   templateUrl: './add-service.component.html',
   styleUrls: ['./add-service.component.css']
 })
-export class AddServiceComponent {
-  user = UserStorageService.getUser();
-  sellerId: number = UserStorageService.getUserId();
+export class AddServiceComponent implements OnInit {
+  userId: number = UserStorageService.getUserId();
   inputdata: any;
   newService: Service;
   editService: Service;
   isEditMode: boolean = false;
   serviceForm?: FormGroup;
+  sellerId: number;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: ServiceService, private fb: FormBuilder, private ref: MatDialogRef<AddServiceComponent>, private serviceImpl: ServiceService) {
-  }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private service: ServiceService,
+    private fb: FormBuilder,
+    private ref: MatDialogRef<AddServiceComponent>,
+    private sellerService: SellerService
+  ) { }
 
   ngOnInit(): void {
     this.inputdata = this.data;
@@ -40,9 +47,26 @@ export class AddServiceComponent {
       this.isEditMode = true;
       this.serviceForm.patchValue(this.inputdata.service);
     }
+    this.getSellerId();
+  }
+
+  getSellerId(): void {
+    this.sellerService.getSellerData(this.userId).subscribe({
+      next: (data: Seller) => {
+        this.sellerId = data.id;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   onSubmit(): void {
+    if (!this.sellerId) {
+      console.log('Seller ID not available yet.');
+      return;
+    }
+
     const serviceData = {
       ...this.serviceForm.value,
       sellerId: this.sellerId
@@ -52,12 +76,20 @@ export class AddServiceComponent {
       this.service.updateService(serviceData).subscribe({
         next: (res) => {
           this.closepopup();
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
         }
       });
     } else {
       this.service.addService(serviceData).subscribe({
         next: (res) => {
+          console.log(res);
           this.closepopup();
+        },
+        error: (err) => {
+          console.log(err);
         }
       });
     }
@@ -68,7 +100,7 @@ export class AddServiceComponent {
   }
 
   setpopudate(id: number) {
-    this.serviceImpl.getService(id).subscribe({
+    this.service.getService(id).subscribe({
       next: (res) => {
         this.editService = res;
         this.serviceForm.setValue({
@@ -80,6 +112,9 @@ export class AddServiceComponent {
           type: this.editService.type,
           status: this.editService.status
         });
+      },
+      error: (err) => {
+        console.log(err);
       }
     });
   }
