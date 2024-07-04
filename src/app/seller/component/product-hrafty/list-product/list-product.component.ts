@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Product } from 'src/app/models/Product.model';
 import { ProductService } from 'src/app/seller/services/product.service';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { SellerService } from 'src/app/seller/services/seller.service';
+import { Seller } from 'src/app/models/Seller.model';
 
 @Component({
   selector: 'app-list-product',
@@ -17,12 +19,18 @@ export class ListProductComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   products: Product[] = [];
-  sellerId: number = UserStorageService.getUserId();
+  sellerId: number;
+  userId = UserStorageService.getUserId();
   datasource: MatTableDataSource<Product>;
+  // columns: string[] = ['Image','Name', 'Description', 'Price','Action'];
   columns: string[] = ['Name', 'Description', 'Price','Action'];
-  constructor(private productService: ProductService, private dialog: MatDialog) {
+  constructor(private productService: ProductService,
+     private dialog: MatDialog,
+    private sellerService:SellerService) {
     this.loadProduct();
   }
+
+
   loadProduct() {
     this.productService.getAllProducts(this.sellerId).subscribe((reponse: Product[]) => {
       this.products = reponse;
@@ -31,6 +39,19 @@ export class ListProductComponent {
       this.datasource.sort = this.sort;
     });
   }
+
+
+  getSellerId(): void {
+    this.sellerService.getSellerData(this.userId).subscribe({
+      next: (data: Seller) => {
+        this.sellerId = data.id;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
 
   detailProduct(id: number) {
 
