@@ -12,21 +12,19 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule } from "@angular/material/paginator"
-import { MatSortModule } from "@angular/material/sort"
-import { MatDialogModule } from "@angular/material/dialog"
-import { MatInputModule } from "@angular/material/input"
-import { MatCheckboxModule } from "@angular/material/checkbox"
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatInputModule } from "@angular/material/input";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatSelectModule } from '@angular/material/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
-    declarations: [],
     imports: [
         CommonModule
     ],
     exports: [
-        BrowserAnimationsModule,        
         MatSidenavModule,
         MatGridListModule,
         MatMenuModule,
@@ -41,12 +39,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatSnackBarModule,
         MatFormFieldModule,
         MatPaginatorModule,
-        MatSortModule, 
+        MatSortModule,
         MatDialogModule,
         MatInputModule,
         MatCheckboxModule,
-        MatSelectModule,
-        
+        MatSelectModule
     ]
 })
 export class MaterialDesignModule { }
