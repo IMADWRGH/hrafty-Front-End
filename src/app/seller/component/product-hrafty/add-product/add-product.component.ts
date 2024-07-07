@@ -32,7 +32,6 @@ export class AddProductComponent {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, Validators.required],
-      type: ['', Validators.required],
     });
     if (this.inputdata && this.inputdata.service) {
       this.isEditMode = true;

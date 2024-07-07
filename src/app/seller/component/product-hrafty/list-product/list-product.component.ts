@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserStorageService } from 'src/app/shared/services/storage/user-storage.service';
@@ -15,36 +15,36 @@ import { Seller } from 'src/app/models/Seller.model';
   templateUrl: './list-product.component.html',
   styleUrls: ['./list-product.component.css']
 })
-export class ListProductComponent {
+export class ListProductComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   products: Product[] = [];
-  sellerId: number;
+  sellerId!: number;
   userId = UserStorageService.getUserId();
-  datasource: MatTableDataSource<Product>;
-  // columns: string[] = ['Image','Name', 'Description', 'Price','Action'];
-  columns: string[] = ['Name', 'Description', 'Price','Action'];
-  constructor(private productService: ProductService,
-     private dialog: MatDialog,
-    private sellerService:SellerService) {
-    this.loadProduct();
-  }
+  datasource!: MatTableDataSource<Product>;
+  columns: string[] = ['Image', 'Name', 'Description', 'Price', 'Action'];
+  constructor(
+    private productService: ProductService,
+    private dialog: MatDialog,
+    private sellerService: SellerService
+  ) { }
 
+  ngOnInit(): void {
+    this.getSellerId();
+  }
 
   loadProduct() {
-    this.productService.getAllProducts(this.sellerId).subscribe((reponse: Product[]) => {
-      this.products = reponse;
-      this.datasource = new MatTableDataSource<Product>(this.products);
-      this.datasource.paginator = this.paginator;
-      this.datasource.sort = this.sort;
-    });
-  }
+    if (!this.sellerId) {
+      console.error('Seller ID is not available yet.');
+      return;
+    }
 
-
-  getSellerId(): void {
-    this.sellerService.getSellerData(this.userId).subscribe({
-      next: (data: Seller) => {
-        this.sellerId = data.id;
+    this.productService.getAllProducts(this.sellerId).subscribe({
+      next: (response: Product[]) => {
+        this.products = response;
+        this.datasource = new MatTableDataSource<Product>(this.products);
+        this.datasource.paginator = this.paginator;
+        this.datasource.sort = this.sort;
       },
       error: (err) => {
         console.log(err);
@@ -52,35 +52,44 @@ export class ListProductComponent {
     });
   }
 
+  getSellerId(): void {
+    this.sellerService.getSellerData(this.userId).subscribe({
+      next: (data: Seller) => {
+        this.sellerId = data.id;
+        this.loadProduct();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
   detailProduct(id: number) {
-
+    // Implementation for detailProduct
   }
 
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe({
       next: (res) => {
         console.log(res);
+        this.loadProduct(); // Reload products after deletion
       },
       error: (err) => {
         console.log(err);
       }
     });
-    this.loadProduct();
   }
-
 
   editProduct(id: number) {
     this.openpopup(id, "Edit Product");
-    console.log(id);
-
   }
 
   addProduct() {
-    this.openpopup(0, "Add new  Product");
+    this.openpopup(0, "Add new Product");
   }
+
   openpopup(id: number, title: string) {
-    var _add = this.dialog.open(AddProductComponent, {
+    const _add = this.dialog.open(AddProductComponent, {
       exitAnimationDuration: '1000ms',
       width: '80%',
       height: '80%',
@@ -89,12 +98,13 @@ export class ListProductComponent {
         id: id
       },
     });
-    _add.afterClosed().subscribe((result) => {
+
+    _add.afterClosed().subscribe(() => {
       this.loadProduct();
     });
   }
-  Filterchange($event: KeyboardEvent) {
-    throw new Error('Method not implemented.');
-  }
 
+  Filterchange($event: KeyboardEvent) {
+    // Implementation for filter change
+  }
 }

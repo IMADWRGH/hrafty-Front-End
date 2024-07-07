@@ -12,15 +12,15 @@ export class ProductService {
   constructor(private http:HttpClient) { }
 
   addProduct(product:Product):Observable<Product>{
-    return this.http.post<Product>(API_URL,product);
+    return this.http.post<Product>(`${API_URL}add`,product);
   }
 
   deleteProduct(id:number){
-    return this.http.delete(`${API_URL}/detele`+id);
+    return this.http.delete(`${API_URL}delete/`+id);
   }
 
   getAllProducts(id:number):Observable<Product[]>{
-    return this.http.get<Product[]>(API_URL+id);
+    return this.http.get<Product[]>(`${API_URL}getAll/`+id);
   }
 
   updateProduct(id:number):Observable<Product>{

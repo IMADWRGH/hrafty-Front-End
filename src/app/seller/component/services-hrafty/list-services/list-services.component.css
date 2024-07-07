@@ -5,9 +5,38 @@ mat-card {
 button {
     margin: 2px;
 }
+.product-image {
+    max-width: 80px;
+    height: auto;
+    display: block;
+    margin: 25px;
+}
 
 .btn-add {
     margin-top: auto;
     margin-left: 60%;
     margin-bottom: 15px;
+}
+.full-screen-table {
+    overflow-x: auto;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-elevation-z8 {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-add {
+    margin-left: auto;
+}
+
+.truncate-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    max-width: 100%;
 }
