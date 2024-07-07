@@ -8,6 +8,14 @@ import { UserStorageService } from '../shared/services/storage/user-storage.serv
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+onClearCart() {
+throw new Error('Method not implemented.');
+}
+cart: any;
+itemsQuantity: string|number;
+getTotal(arg0: any): string|number {
+throw new Error('Method not implemented.');
+}
   constructor(private route: Router) { }
 
   isCustomerLoggedIn: boolean;

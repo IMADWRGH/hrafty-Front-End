@@ -5,7 +5,6 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerComponent } from './customer.component';
 import { CustomerDashboardComponent } from './component/customer-dashboard/customer-dashboard.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { HeaderCustomerComponent } from './component/header-customer/header-customer.component';
 import { MaterialDesignModule } from '../material-design.module';
 
 
@@ -14,7 +13,6 @@ import { MaterialDesignModule } from '../material-design.module';
     CustomerComponent,
     CustomerDashboardComponent,
     ProfileComponent,
-    HeaderCustomerComponent
   ],
   imports: [
     CommonModule,

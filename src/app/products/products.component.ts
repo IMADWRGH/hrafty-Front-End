@@ -9,6 +9,7 @@ import { Product } from '../models/Product.model';
 })
 export class ProductsComponent {
 product:Product[]=[];
+clos: any;
 constructor(private sp:ProductService){}
   products:any = [
     {
