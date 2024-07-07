@@ -39,7 +39,7 @@ export class ListProductComponent implements OnInit {
       return;
     }
 
-    this.productService.getAllProducts(this.sellerId).subscribe({
+    this.productService.getProducts(this.sellerId).subscribe({
       next: (response: Product[]) => {
         this.products = response;
         this.datasource = new MatTableDataSource<Product>(this.products);
