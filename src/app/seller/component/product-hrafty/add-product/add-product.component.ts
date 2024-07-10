@@ -32,6 +32,7 @@ export class AddProductComponent {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, Validators.required],
+      category: ['', Validators.required],
     });
     if (this.inputdata && this.inputdata.service) {
       this.isEditMode = true;
@@ -74,6 +75,7 @@ export class AddProductComponent {
           name: this.editProduct.name,
           description: this.editProduct.description,
           price: this.editProduct.price,
+          category: this.editProduct.category
         });
       }
     });

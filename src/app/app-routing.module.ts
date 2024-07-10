@@ -5,11 +5,12 @@ import { ChooseRegistrationComponent } from './shared/component/choose-registrat
 import { HomeComponent } from './home/home.component';
 import { SellerRegistrationComponent } from './shared/component/seller-registration/seller-registration.component';
 import { CustomerRegistrationComponent } from './shared/component/customer-registration/customer-registration.component';
-import { ProductsComponent } from './products/products.component';
 import { SellerAuthGuard } from './shared/services/authGuard/seller-auth-guard.guard';
 import { CustomerAuthGuard } from './shared/services/authGuard/customer-auth-guard.guard';
 import { HraftyServiceComponent } from './hrafty-service/hrafty-service.component';
 import { ContactComponent } from './contact/contact.component';
+import { ProductsComponent } from './hrafty-product/products.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', title: 'Home - page' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'services', component: HraftyServiceComponent, title: 'Services - page' },
   { path: 'contact', component: ContactComponent, title: 'Contact - page' },
   { path: 'products', component: ProductsComponent, title: 'Products - page' },
+  { path: 'cart', component: CartComponent, title: 'Cart - page' },
   { path: 'singup', component: ChooseRegistrationComponent, title: 'Singup - page' },
   { path: 'seller-register', component: SellerRegistrationComponent },
   { path: 'customer-register', component: CustomerRegistrationComponent },

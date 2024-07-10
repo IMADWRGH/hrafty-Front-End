@@ -1,0 +1,8 @@
+mat-expansion-panel {
+    margin: 50px 5px 0 5px;
+    border:0;
+}
+button{
+    background-color:transparent;
+    border: 0px;
+}

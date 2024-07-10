@@ -43,7 +43,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatDialogModule,
         MatInputModule,
         MatCheckboxModule,
-        MatSelectModule
+        MatSelectModule,
+        
     ]
 })
 export class MaterialDesignModule { }

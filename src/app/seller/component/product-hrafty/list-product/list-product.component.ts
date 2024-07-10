@@ -22,7 +22,7 @@ export class ListProductComponent implements OnInit {
   sellerId!: number;
   userId = UserStorageService.getUserId();
   datasource!: MatTableDataSource<Product>;
-  columns: string[] = ['Image', 'Name', 'Description', 'Price', 'Action'];
+  columns: string[] = ['Image', 'Name', 'Description','Category', 'Price', 'Action'];
   constructor(
     private productService: ProductService,
     private dialog: MatDialog,
