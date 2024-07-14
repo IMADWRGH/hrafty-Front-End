@@ -11,6 +11,7 @@ import { HraftyServiceComponent } from './hrafty-service/hrafty-service.componen
 import { ContactComponent } from './contact/contact.component';
 import { ProductsComponent } from './hrafty-product/products.component';
 import { CartComponent } from './cart/cart.component';
+import { DetailsServicesComponent } from './home/details-services/details-services.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', title: 'Home - page' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'singup', component: ChooseRegistrationComponent, title: 'Singup - page' },
   { path: 'seller-register', component: SellerRegistrationComponent },
   { path: 'customer-register', component: CustomerRegistrationComponent },
+  { path: 'test', component: DetailsServicesComponent },
   {
     path: 'seller',
     loadChildren: () =>

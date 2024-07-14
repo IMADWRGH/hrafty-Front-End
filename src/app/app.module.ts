@@ -21,6 +21,7 @@ import { ProductsHeaderComponent } from './hrafty-product/components/products-he
 import { FilterComponent } from './hrafty-product/components/filter/filter.component';
 import { ProductBoxComponent } from './hrafty-product/components/product-box/product-box.component';
 import { CartComponent } from './cart/cart.component';
+import { DetailsServicesComponent } from './home/details-services/details-services.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CartComponent } from './cart/cart.component';
     ProductsHeaderComponent,
     FilterComponent,
     ProductBoxComponent,
-    CartComponent
+    CartComponent,
+    DetailsServicesComponent
   ],
   imports: [
     BrowserModule,
