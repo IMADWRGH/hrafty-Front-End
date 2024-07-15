@@ -4,7 +4,7 @@ export interface Service {
     description: string;
     image: string;
     price: number;
-    type: string;
+    category: string;
     status: boolean;
     sellerId: number;
 }

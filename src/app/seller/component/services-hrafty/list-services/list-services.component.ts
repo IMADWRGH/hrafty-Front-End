@@ -22,7 +22,7 @@ export class ListServicesComponent implements OnInit {
   userId = UserStorageService.getUserId();
   sellerId: number;
   datasource: MatTableDataSource<Service>;
-  columns: string[] = ['Image','Name', 'Description', 'Price', 'Type', 'Status', 'Action'];
+  columns: string[] = ['Image','Name', 'Description', 'Price', 'Category', 'Status', 'Action'];
 
   constructor(
     private serviceService: ServiceService,

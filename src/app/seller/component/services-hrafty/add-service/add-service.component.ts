@@ -40,7 +40,7 @@ export class AddServiceComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, Validators.required],
-      type: ['', Validators.required],
+      category: ['', Validators.required],
       status: [false]
     });
     if (this.inputdata && this.inputdata.service) {
@@ -109,7 +109,7 @@ export class AddServiceComponent implements OnInit {
           name: this.editService.name,
           description: this.editService.description,
           price: this.editService.price,
-          type: this.editService.type,
+          category:this.editService.category,
           status: this.editService.status
         });
       },

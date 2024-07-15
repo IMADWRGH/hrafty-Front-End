@@ -1,3 +1,14 @@
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .mat-form-field {
     width: 100%;
     background-color: #ffffff;
@@ -17,6 +28,11 @@
     background-color: #f9f9f958;
 }
 
+.category-card {
+    margin: 15px;
+    width: 200px;
+}
+
 
 .card-img-top {
     width: 100px;
@@ -24,11 +40,15 @@
     margin: 0 auto;
 }
 
-.card-text{
+.card-text {
     font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
     color: gray;
+}
+
+.card-text {
+    cursor: pointer;
 }
 
 @media (min-width: 576px) {
@@ -67,7 +87,7 @@ button.mat-raised-button {
 button[mat-raised-button] {
     width: 100%;
     background-color: #afa04c;
-    color:white;
+    color: white;
 }
 
 button[mat-raised-button] mat-icon {
@@ -76,5 +96,5 @@ button[mat-raised-button] mat-icon {
 
 button[mat-raised-button]:hover {
     background-color: #afa04d;
-    
+
 }

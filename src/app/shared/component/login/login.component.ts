@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Auth } from 'src/app/models/Auth.model';
+import { Router } from '@angular/router';
 import { UserStorageService } from '../../services/storage/user-storage.service';
 
 @Component({
@@ -13,20 +12,20 @@ import { UserStorageService } from '../../services/storage/user-storage.service'
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted: boolean = false;
+  loginError: string = '';
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private service: AuthService,
-
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
-  ngOnInit(): void {
 
+  ngOnInit(): void {
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -38,8 +37,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.service.login(this.loginForm.get(['email'])!.value, this.loginForm.get(['password'])!.value).subscribe(
-      res => {
+
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
+      (res) => {
         console.log(res);
         if (UserStorageService.isSellerLoggedIn()) {
           this.router.navigate(['seller/profile']);
@@ -47,10 +47,16 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('customer');
         }
       },
-      err => {
+      (err) => {
         console.log(err);
+        if (err.error === 'Email not found') {
+          this.loginError = 'Email not found.';
+        } else if (err.error === 'Invalid password') {
+          this.loginError = 'Invalid password.';
+        } else {
+          this.loginError = 'An unexpected error occurred. Please try again later.';
+        }
       }
     );
   }
-
 }

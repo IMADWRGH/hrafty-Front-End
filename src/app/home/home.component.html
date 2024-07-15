@@ -8,20 +8,16 @@
               <div class="col-md-5">
                 <mat-form-field appearance="outline">
                   <mat-label>City</mat-label>
-                  <mat-select>
-                    <mat-option value="City1">City 1</mat-option>
-                    <mat-option value="City2">City 2</mat-option>
-                    <mat-option value="City3">City 3</mat-option>
+                  <mat-select formControlName="city">
+                    <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-5">
                 <mat-form-field appearance="outline">
                   <mat-label>Select Category</mat-label>
-                  <mat-select>
-                    <mat-option value="category1">Category 1</mat-option>
-                    <mat-option value="category2">Category 2</mat-option>
-                    <mat-option value="category3">Category 3</mat-option>
+                  <mat-select formControlName="category">
+                    <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -38,17 +34,37 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-2 col-sm-4 mb-4" *ngFor="let item of items">
-      <div class="card text-center shadow">
-        <img
-          [src]="item.image"
-          class="card-img-top rounded-circle p-2"
-          alt="..."
-        />
-        <div class="card-body">
-          <a routerLink="/test" class="card-text">{{ item.name }}</a>
-        </div>
+ <div class="row justify-content-center">
+  <div class="col-md-2 col-sm-4 mb-4" *ngFor="let item of items">
+    <div class="card text-center shadow" (click)="onCategoryClick(item.category)">
+      <img [src]="item.image" class="card-img-top rounded-circle p-2" alt="..." />
+      <div class="card-body">
+        <div class="card-text">{{ item.category }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="details-service" *ngIf="selectedCategory">
+    <div class="row">
+      <div class="text-center"><h1>List of {{selectedCategory}}</h1></div>
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let card of cards">
+        <mat-card class="card shadow" appearance="outlined">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{ card.name }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="/assets/images/bg-image.jpg" alt="Card image" />
+          <mat-card-content>
+            <p class="mt-2">{{ card.description }}</p>
+            <p>
+              <mat-icon class="custom-icon">location_on</mat-icon>
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button color="primary" mat-button>Booking</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
   </div>

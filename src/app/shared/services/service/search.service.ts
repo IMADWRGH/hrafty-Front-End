@@ -11,18 +11,25 @@ export class SearchService {
   private searchResultsSubject = new BehaviorSubject<Service[]>([]);
   searchResults$ = this.searchResultsSubject.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   search(city?: string, category?: string): Observable<Service[]> {
-    const url = `${API_URL}products${city ? `/${city}` : ''}${category ? `/${category}` : ''}`;
+    let url = `${API_URL}services`;
+    if (city && category) {
+      url += `/city/${city}/category/${category}`;
+    } else if (city) {
+      url += `/city/${city}`;
+    } else if (category) {
+      url += `/category/${category}`;
+    }
     return this.http.get<Service[]>(url);
   }
 
 
-  getAllCategories():Observable<String[]>{
+  getAllCategories(): Observable<String[]> {
     return this.http.get<String[]>(`${API_URL}service-categories`);
   }
-  getAllCities():Observable<String[]>{
+  getAllCities(): Observable<String[]> {
     return this.http.get<String[]>(`${API_URL}cities`);
   }
 
