@@ -22,6 +22,7 @@ import { FilterComponent } from './hrafty-product/components/filter/filter.compo
 import { ProductBoxComponent } from './hrafty-product/components/product-box/product-box.component';
 import { CartComponent } from './cart/cart.component';
 import { DetailsServicesComponent } from './home/details-services/details-services.component';
+import { ConformationDialogComponent } from './shared/component/conformation-dialog/conformation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DetailsServicesComponent } from './home/details-services/details-servic
     FilterComponent,
     ProductBoxComponent,
     CartComponent,
-    DetailsServicesComponent
+    DetailsServicesComponent,
+    ConformationDialogComponent
   ],
   imports: [
     BrowserModule,

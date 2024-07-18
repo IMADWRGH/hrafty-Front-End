@@ -19,7 +19,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatSelectModule } from '@angular/material/select';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
     imports: [
         CommonModule
@@ -44,6 +44,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatInputModule,
         MatCheckboxModule,
         MatSelectModule,
+        MatProgressSpinnerModule
+    
         
     ]
 })
