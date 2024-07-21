@@ -2,3 +2,14 @@
     z-index: 2;
     width: 280px;
 }
+
+mat-drawer-container{
+    background-image: url('/assets/images/bg-image.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+}
+
+mat-drawer{
+    background-color: rgba(255, 255, 255, 0.8);
+}
