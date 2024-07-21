@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class SellerRegistrationComponent implements OnInit {
   currentStep: number = 0;
   submitted: boolean = false;
-
+  selectedFile:File ;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -93,12 +93,7 @@ export class SellerRegistrationComponent implements OnInit {
     this.userSignupFormGroup.reset();
   }
 
-  onFileChange(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.userSignupFormGroup.patchValue({
-        image: file.name
-      });
-    }
+  onFileChange(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 }

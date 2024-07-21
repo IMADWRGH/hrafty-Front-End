@@ -24,7 +24,7 @@ export class TestComponent {
     userId: null
   };
 
-  selectedFile: File | null = null;
+  selectedFile: File;
 
   constructor(private authService: AuthService) { }
 

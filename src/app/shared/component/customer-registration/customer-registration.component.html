@@ -1,189 +1,83 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div
-      class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2"
-    >
-      <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+    <div class="col-11 col-sm-10 col-md-8 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+      <mat-card class="shadow p-4 mb-5 card rounded">
         <h2 id="heading">Sign Up Your User Account</h2>
-        <p>Fill all form field to go to next step</p>
-        <form
-          id="msform"
-          [formGroup]="userSignupFormGroup"
-          (ngSubmit)="onSubmit()"
-        >
-          <br />
-          <!-- fieldsets -->
-          <fieldset *ngIf="currentStep === 0">
-            <div class="form-card">
-              <div class="row">
-                <div class="col-7">
-                  <h2 class="fs-title">Account Information:</h2>
-                </div>
+        <form [formGroup]="userSignupFormGroup" (ngSubmit)="onSubmit()">
+          <div class="form-card">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Email</mat-label>
+                  <input matInput type="email" formControlName="email" placeholder="Email" />
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error *ngIf="f['email'].errors">
+                    <div *ngIf="f['email'].errors['required']">Email is required.</div>
+                    <div *ngIf="f['email'].errors['email']">Invalid email format.</div>
+                  </mat-error>
+                </mat-form-field>
               </div>
-              <div class="form-group">
-                <label class="fieldlabels">Email: *</label>
-                <input
-                  type="email"
-                  name="email"
-                  class="form-control"
-                  placeholder="Email"
-                  formControlName="email"
-                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-                />
-                <div
-                  *ngIf="submitted && f['email'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['email'].errors['required']">
-                    Email is required.
-                  </div>
-                  <div *ngIf="f['email'].errors['email']">
-                    Invalid email format.
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="fieldlabels">Full Name: *</label>
-                <input
-                  type="text"
-                  name="fullname"
-                  class="form-control"
-                  placeholder="Full Name"
-                  formControlName="fullName"
-                  [ngClass]="{
-                    'is-invalid': submitted && f['fullName'].errors
-                  }"
-                />
-                <div
-                  *ngIf="submitted && f['fullName'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['fullName'].errors['required']">
-                    Full Name is required.
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="fieldlabels">Password: *</label>
-                <input
-                  type="password"
-                  name="pwd"
-                  class="form-control"
-                  placeholder="Password"
-                  formControlName="password"
-                  [ngClass]="{
-                    'is-invalid': submitted && f['password'].errors
-                  }"
-                />
-                <div
-                  *ngIf="submitted && f['password'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['password'].errors['required']">
-                    Password is required.
-                  </div>
-                  <div *ngIf="f['password'].errors['minlength']">
-                    Password must be at least 6 characters long.
-                  </div>
-                </div>
+              <div class="col-md-6 form-group">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Full Name</mat-label>
+                  <input matInput type="text" formControlName="fullName" placeholder="Full Name" />
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error *ngIf="f['fullName'].errors">
+                    <div *ngIf="f['fullName'].errors['required']">Full Name is required.</div>
+                  </mat-error>
+                </mat-form-field>
               </div>
             </div>
-            <input
-              type="button"
-              name="next"
-              class="next action-button"
-              value="Next"
-              (click)="next()"
-            />
-          </fieldset>
-          <fieldset *ngIf="currentStep === 1">
-            <div class="form-card">
-              <div class="row">
-                <div class="col-7">
-                  <h2 class="fs-title">Profile Information:</h2>
-                </div>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+                  <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="f['password'].errors">
+                    <div *ngIf="f['password'].errors['required']">Password is required.</div>
+                    <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters long.</div>
+                  </mat-error>
+                </mat-form-field>
               </div>
-              <div class="form-group">
-                <label class="fieldlabels">Phone: *</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  class="form-control"
-                  placeholder="Phone Number"
-                  formControlName="phone"
-                  [ngClass]="{
-                    'is-invalid': submitted && f['phone'].errors
-                  }"
-                />
-                <div
-                  *ngIf="submitted && f['phone'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['phone'].errors['required']">
-                    Phone Number is required.
-                  </div>
-                </div>
+              <div class="col-md-6 form-group">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Phone</mat-label>
+                  <input matInput type="tel" formControlName="phone" placeholder="Phone Number" />
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error *ngIf="f['phone'].errors">
+                    <div *ngIf="f['phone'].errors['required']">Phone Number is required.</div>
+                  </mat-error>
+                </mat-form-field>
               </div>
-              <div class="form-group">
-                <label class="fieldlabels">Profile Image: *</label>
-                <input
-                  type="file"
-                  name="image"
-                  class="form-control"
-                  placeholder="Profile Image"
-                  formControlName="image"
-                  [ngClass]="{
-                    'is-invalid': submitted && f['image'].errors
-                  }"
-                />
-                <div
-                  *ngIf="submitted && f['image'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['image'].errors['required']">
-                    Profile Image is required.
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="fieldlabels">Sex: *</label>
-                <select
-                  name="sexe"
-                  class="form-control"
-                  formControlName="sexe"
-                  [ngClass]="{
-                    'is-invalid': submitted && f['sexe'].errors
-                  }"
-                >
-                  <option value="M">Male</option>
-                  <option value="F">Female</option>
-                </select>
-                <div
-                  *ngIf="submitted && f['sexe'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['sexe'].errors['required']">
-                    Sex is required.
-                  </div>
-                </div>
-              </div>
-              <input
-                type="submit"
-                name="next"
-                class="next action-button"
-                value="Submit"
-              />
-              <input
-                type="button"
-                name="previous"
-                class="previous action-button-previous"
-                value="Previous"
-                (click)="previous()"
-              />
             </div>
-          </fieldset>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Sex</mat-label>
+                  <mat-select formControlName="sexe">
+                    <mat-option value="M">Male</mat-option>
+                    <mat-option value="F">Female</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="f['sexe'].errors">
+                    <div *ngIf="f['sexe'].errors['required']">Sex is required.</div>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="fieldlabels">Profile Image </label>
+                <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
+              </div>
+            </div>
+            <div class="form-group text-center mt-4">
+              <button mat-raised-button color="primary" type="submit" [disabled]="userSignupFormGroup.invalid">Register</button>
+              <button mat-raised-button color="warn" type="button" (click)="onReset()" class="ml-2">Reset</button>
+            </div>
+          </div>
         </form>
-      </div>
+      </mat-card>
     </div>
   </div>
 </div>
