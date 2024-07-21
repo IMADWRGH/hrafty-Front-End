@@ -1,0 +1,27 @@
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" [(ngModel)]="user.fullName" name="fullName" required>
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+  </div>
+  <div>
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" [(ngModel)]="customer.phone" name="phone" required>
+  </div>
+  <div>
+    <label for="sexe">Sexe:</label>
+    <input type="text" id="sexe" [(ngModel)]="customer.sexe" name="sexe" required>
+  </div>
+  <div>
+    <label for="file">Profile Image:</label>
+    <input type="file" id="file" (change)="onFileChange($event)" required>
+  </div>
+  <button type="submit">Register</button>
+</form>

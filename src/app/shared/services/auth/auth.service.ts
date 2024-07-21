@@ -1,4 +1,4 @@
-import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Auth } from 'src/app/models/Auth.model';
@@ -37,6 +37,21 @@ export class AuthService {
 
   registerCustomer(request: Auth): Observable<Customer> {
     return this.http.post<Customer>(`${API_URL}/register-customer`, request);
+  }
+  
+  registerCustomers(formData: FormData): Observable<any> {
+    return this.http.post(`${API_URL}/register-customer`, formData, {
+      headers: new HttpHeaders({ 'Accept': 'application/json' }),
+      withCredentials: false 
+    });
+  }
+  registe(user: User, customer: Customer, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('user', JSON.stringify(user));
+    formData.append('customer', JSON.stringify(customer));
+    formData.append('file', file, file.name);
+
+    return this.http.post<any>(`${API_URL}/register-customer`, formData);
   }
 
   registerSeller(request: Auth): Observable<Seller> {

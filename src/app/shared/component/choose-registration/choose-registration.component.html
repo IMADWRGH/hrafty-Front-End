@@ -1,32 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Register as Seller</h5>
-          <p class="card-text">
-            Join us as a seller and start listing your products today. Reach
-            thousands of customers worldwide and grow your business.
-          </p>
-          <button class="btn btn-primary" (click)="register('seller')">
-            Register
-          </button>
-        </div>
-      </div>
+      <mat-card class="choice-card" (click)="register('artisan')">
+        <mat-card-header>
+          <mat-card-title>Artisan</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="/assets/images/seller.png" alt="Artisan" class="mb-5">
+        <mat-card-content>
+          <p>Join as an artisan to showcase and sell your handcrafted products.</p>
+        </mat-card-content>
+      </mat-card>
     </div>
     <div class="col-md-6">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Register as Customer</h5>
-          <p class="card-text">
-            Become a customer and explore a wide variety of products from
-            different sellers. Enjoy a seamless shopping experience with us.
-          </p>
-          <button class="btn btn-primary" (click)="register('customer')">
-            Register
-          </button>
-        </div>
-      </div>
+      <mat-card class="choice-card" (click)="register('customer')">
+        <mat-card-header>
+          <mat-card-title>Customer</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="/assets/images/customer.png" alt="Customer" class="mb-5">
+        <mat-card-content>
+          <p>Sign up as a customer to discover and purchase unique artisan products.</p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

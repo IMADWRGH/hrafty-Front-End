@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserStorageService } from '../shared/services/storage/user-storage.service';
+import { CustomerService } from '../customer/services/customer.service';
+import { Customer } from '../models/Customer.model';
+import { Cart, CartItem } from '../models/Cart.model';
+import { CartService } from '../shared/services/service/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -8,20 +12,19 @@ import { UserStorageService } from '../shared/services/storage/user-storage.serv
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-onClearCart() {
-throw new Error('Method not implemented.');
-}
-cart: any;
-itemsQuantity: string|number;
-getTotal(arg0: any): string|number {
-throw new Error('Method not implemented.');
-}
-  constructor(private route: Router) { }
+  userId = UserStorageService.getUserId()
+  private _cart: Cart = { items: [] };
+  itemsQuantity = 0;
+
+  customer?: Customer;
+
+  constructor(private route: Router, private customerService: CustomerService, private cartService: CartService) { }
 
   isCustomerLoggedIn: boolean;
-  isSellerLoggedIn: boolean ;
+  isSellerLoggedIn: boolean;
   user = UserStorageService.getUser();
   ngOnInit(): void {
+    this.getCustomer();
     this.route.events.subscribe(event => {
       this.isCustomerLoggedIn = UserStorageService.isCustomerLoggedIn();
       this.isSellerLoggedIn = UserStorageService.isSellerLoggedIn();
@@ -33,4 +36,36 @@ throw new Error('Method not implemented.');
     this.route.navigateByUrl('login');
   }
 
+  getCustomer() {
+    this.customerService.getCustomerData(this.userId).subscribe(
+      (data: Customer) => {
+        this.customer = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  @Input()
+  get cart(): Cart {
+    return this._cart;
+  }
+
+  set cart(cart: Cart) {
+    this._cart = cart;
+    this.itemsQuantity = cart.items
+      .map((item) => item.quantity)
+      .reduce((prev, curent) => prev + curent, 0);
+  }
+
+
+
+  getTotal(items: Array<CartItem>): number {
+    return this.cartService.getTotal(items);
+  }
+
+  onClearCart(): void {
+    this.cartService.ClearCart();
+  }
 }
