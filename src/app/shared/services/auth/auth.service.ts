@@ -35,9 +35,9 @@ export class AuthService {
   }
 
 
-  registerCustomer(request: Auth): Observable<Customer> {
-    return this.http.post<Customer>(`${API_URL}/register-customer`, request);
-  }
+  // registerCustomer(request: Auth): Observable<Customer> {
+  //   return this.http.post<Customer>(`${API_URL}/register-customer`, request);
+  // }
   
   registerCustomers(formData: FormData): Observable<any> {
     return this.http.post(`${API_URL}/register-customer`, formData, {
@@ -45,17 +45,17 @@ export class AuthService {
       withCredentials: false 
     });
   }
-  registe(user: User, customer: Customer, file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('user', JSON.stringify(user));
-    formData.append('customer', JSON.stringify(customer));
-    formData.append('file', file, file.name);
+  // registe(user: User, customer: Customer, file: File): Observable<any> {
+  //   const formData = new FormData();
+  //   formData.append('user', JSON.stringify(user));
+  //   formData.append('customer', JSON.stringify(customer));
+  //   formData.append('file', file, file.name);
 
-    return this.http.post<any>(`${API_URL}/register-customer`, formData);
-  }
+  //   return this.http.post<any>(`${API_URL}/register-customer`, formData);
+  // }
 
-  registerSeller(request: Auth): Observable<Seller> {
-    return this.http.post<Seller>(`${API_URL}/register-seller`, request);
+  registerSeller(formData: FormData): Observable<Seller> {
+    return this.http.post<Seller>(`${API_URL}/register-seller`, formData);
   }
   singup(user: User): Observable<User> {
     return this.http.post<User>(`${API_URL}`, user);

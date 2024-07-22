@@ -54,12 +54,9 @@
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="fieldlabels">Profile Image: *</label>
-                  <input type="file" name="image" class="form-control" placeholder="Profile Image" formControlName="image" [ngClass]="{'is-invalid': submitted && f['image'].errors}" />
-                  <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
-                    <div *ngIf="f['image'].errors['required']">Profile Image is required.</div>
-                  </div>
-                </div>
+                <label class="fieldlabels">Profile Image: (Optional)</label>
+                <input type="file" name="image" class="form-control" (change)="onFileChange($event)" accept="image/*" />
+              </div>
                 <div class="col-md-6 form-group">
                   <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Sex</mat-label>

@@ -15,6 +15,9 @@
 .mat-card-content {
     padding-top: 15px;
 } */
+.container{
+    height: 100vh;
+}
 .search {
     padding-top: 0.5rem;
 }

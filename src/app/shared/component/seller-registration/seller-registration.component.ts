@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,13 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./seller-registration.component.css']
 })
 export class SellerRegistrationComponent implements OnInit {
-  currentStep: number = 0;
   submitted: boolean = false;
-  selectedFile:File ;
+  selectedFile: File | null = null;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private route: Router
+    private router: Router
   ) { }
 
   userSignupFormGroup: FormGroup = this.formBuilder.group({
@@ -25,7 +24,6 @@ export class SellerRegistrationComponent implements OnInit {
     fullName: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
     nb_license: ['', Validators.required],
-    image: ['', Validators.required],
     sexe: ['', Validators.required],
     phone: ['', Validators.required],
     site: ['', Validators.required],
@@ -48,6 +46,8 @@ export class SellerRegistrationComponent implements OnInit {
       return;
     }
 
+    const formData = new FormData();
+
     const user = {
       fullName: this.userSignupFormGroup.value.fullName,
       email: this.userSignupFormGroup.value.email,
@@ -55,27 +55,28 @@ export class SellerRegistrationComponent implements OnInit {
       role: 'SELLER'
     };
 
-    const address = {
-      street: this.userSignupFormGroup.value.street,
-      name_regional: this.userSignupFormGroup.value.name_regional,
-      name_city: this.userSignupFormGroup.value.name_city,
-      shop_number: this.userSignupFormGroup.value.shop_number,
-    };
-
     const seller = {
       nb_license: this.userSignupFormGroup.value.nb_license,
-      image: this.userSignupFormGroup.value.image,
       sexe: this.userSignupFormGroup.value.sexe,
       phone: this.userSignupFormGroup.value.phone,
       site: this.userSignupFormGroup.value.site,
-      addressId: address
+      addressId: {
+        street: this.userSignupFormGroup.value.street,
+        shop_number: this.userSignupFormGroup.value.shop_number,
+        name_city: this.userSignupFormGroup.value.name_city,
+        name_regional: this.userSignupFormGroup.value.name_regional
+      }
     };
 
-    const payload = { user, seller };
+    formData.append('user', JSON.stringify(user));
+    formData.append('seller', JSON.stringify(seller));
 
-    this.authService.registerSeller(payload).subscribe({
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile, this.selectedFile.name);
+    }
+    this.authService.registerSeller(formData).subscribe({
       next: data => {
-        this.route.navigate(['/login']);
+        this.router.navigate(['/login']);
         console.log('Seller registered successfully', data);
       },
       error: error => {
@@ -91,9 +92,13 @@ export class SellerRegistrationComponent implements OnInit {
   onReset(): void {
     this.submitted = false;
     this.userSignupFormGroup.reset();
+    this.selectedFile = null;
   }
 
   onFileChange(event: any) {
-    this.selectedFile = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 }

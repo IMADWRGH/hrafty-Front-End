@@ -1,5 +1,4 @@
-<div *ngIf="!isCustomerLoggedIn && !isSellerLoggedIn">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="home">Hrafty</a>
       <button
@@ -48,35 +47,40 @@
               aria-current="page"
               routerLinkActive="active-link"
               routerLink="contact"
-              >Contact</a
+              >contact</a
             >
           </li>
         </ul>
         <div>
           <ul class="nav justify-content-end">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" routerLink="/login"
-                >login</a
-              >
-            </li>
-            <li class="nav-item">
               <button
-                class="btn"
-                routerLink="/singup"
-                routerLinkActive="active-link"
+                mat-button
+                [matMenuTriggerFor]="userMenu"
+                class="nav-link d-flex align-items-center"
               >
-                Sign up
-                <div class="arrow-wrapper">
-                  <div class="arrow"></div>
-                </div>
+                <img
+  *ngIf="seller"
+  [src]="seller.imageURL"
+  class="profile-image"
+/>
+                <span class="ms-2" style="color: white">{{
+                  user?.fullName
+                }}</span>
               </button>
+              <mat-menu #userMenu="matMenu">
+                <button mat-menu-item [routerLink]="['/seller/profile']">
+                  Profile
+                </button>
+                <!-- <button mat-menu-item [routerLink]="['/ashboard']">
+        Dashboard
+      </button> -->
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="logOut()">Logout</button>
+              </mat-menu>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </nav>
-</div>
-<app-header-customer *ngIf="isCustomerLoggedIn"></app-header-customer>
-<app-header-seller *ngIf="isSellerLoggedIn"></app-header-seller>
-

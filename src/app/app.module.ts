@@ -24,6 +24,8 @@ import { CartComponent } from './cart/cart.component';
 import { DetailsServicesComponent } from './home/details-services/details-services.component';
 import { ConformationDialogComponent } from './shared/component/conformation-dialog/conformation-dialog.component';
 import { TestComponent } from './shared/component/test/test.component';
+import { CustomerModule } from './customer/customer.module';
+import { SellerModule } from './seller/seller.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { TestComponent } from './shared/component/test/test.component';
     CartComponent,
     DetailsServicesComponent,
     ConformationDialogComponent,
-    TestComponent
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,9 @@ import { TestComponent } from './shared/component/test/test.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialDesignModule
+    MaterialDesignModule,
+    CustomerModule,
+    SellerModule
   ],
   providers: [
     {

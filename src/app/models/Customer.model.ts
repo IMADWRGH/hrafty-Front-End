@@ -2,6 +2,6 @@ export interface Customer{
     id?: number;
     sexe?: string;
     phone?: string;
-    imageURL?:number;
+    imageURL?:string;
     userId?: number;
 }
