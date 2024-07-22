@@ -146,3 +146,8 @@ nav ul li a:hover::after {
     top: -7px;
     left: 15px;
 }
+
+.cart_link{
+    text-decoration: none;
+    color: #645bff;
+}

@@ -144,8 +144,8 @@
               <mat-menu #menu="matMenu">
                 <div class="p-3 border-bottom">
                   <div class="pb-3 d-flex justify-content-between">
-                    <span class="me-4">1 items</span>
-                    <a routerLink="cart">View Cart</a>
+                    <span class="me-4">{{itemsQuantity}} items</span>
+                    <a class="cart_link" routerLink="cart">View Cart</a>
                   </div>
                   <div *ngIf="cart?.items.length" class="py-3">
                     <div
@@ -163,15 +163,15 @@
                     }}</span>
                   </div>
                   <div class="pt-3 d-flex justify-content-between">
-                    <button
+                    <button mat-icon-button
                       (click)="onClearCart()"
-                      class="btn btn-danger rounded-circle"
+                      color="warn"
                     >
                       <mat-icon>remove_shopping_cart</mat-icon>
                     </button>
-                    <button
+                    <button mat-icon-button
                       routerLink="cart"
-                      class="btn btn-success rounded-circle"
+                      color="primary"
                     >
                       <mat-icon>shopping_cart_checkout</mat-icon>
                     </button>
@@ -185,7 +185,7 @@
                 class="nav-link d-flex align-items-center"
               >
                 <img
-                  [src]="customer?.imageURL"
+                  [src]="customer?.imageURL || '/assets/images/profile.png'"
                   class="profile-image rounded-circle"
                   alt="User Image"
                   width="30"
@@ -270,12 +270,12 @@
                 class="nav-link d-flex align-items-center"
               >
                 <img
-                  src="/assets/images/img1.jpg"
+                  [src]="seller.imageURL || '/assets/images/profile.png'"
                   class="profile-image"
                   alt="User Image"
                 />
                 <span class="ms-2" style="color: white">{{
-                  user.fullName
+                  user?.fullName
                 }}</span>
               </button>
               <mat-menu #userMenu="matMenu">

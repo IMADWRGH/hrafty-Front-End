@@ -5,6 +5,8 @@ import { CustomerService } from '../customer/services/customer.service';
 import { Customer } from '../models/Customer.model';
 import { Cart, CartItem } from '../models/Cart.model';
 import { CartService } from '../shared/services/service/cart.service';
+import { Seller } from '../models/Seller.model';
+import { SellerService } from '../seller/services/seller.service';
 
 @Component({
   selector: 'app-header',
@@ -15,10 +17,10 @@ export class HeaderComponent {
   userId = UserStorageService.getUserId()
   private _cart: Cart = { items: [] };
   itemsQuantity = 0;
-
+  seller?:Seller;
   customer?: Customer;
 
-  constructor(private route: Router, private customerService: CustomerService, private cartService: CartService) { }
+  constructor(private route: Router, private customerService: CustomerService, private cartService: CartService,private sellerService:SellerService) { }
 
   isCustomerLoggedIn: boolean;
   isSellerLoggedIn: boolean;
@@ -40,6 +42,16 @@ export class HeaderComponent {
     this.customerService.getCustomerData(this.userId).subscribe(
       (data: Customer) => {
         this.customer = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+   getSeller() {
+     this.sellerService.getSellerData(this.userId).subscribe(
+      (data: Seller) => {
+        this.seller = data;
       },
       (error) => {
         console.log(error);

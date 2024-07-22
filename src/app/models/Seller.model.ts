@@ -3,7 +3,7 @@ import { Address } from "./Address.model";
 export interface Seller {
     id?: number;
     nb_license?: number;
-    image?: string;
+    imageURL?: string;
     sexe?: string;
     phone?: string;
     site?: string;
