@@ -38,10 +38,10 @@ export class ProductsComponent {
     this.getProduct();
     console.log(category)
   }
-
+  // product: product.images,
   onAddToCart(product: Product): void {
     this.cartService.addTocart({
-      product: product.image,
+     product: null,
       name: product.name,
       price: product.price,
       quantity: 1,

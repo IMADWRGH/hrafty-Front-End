@@ -1,5 +1,7 @@
 export interface Image {
-    id?: string;
-    filename?: string;
-    url?: string
+    id?: number;
+    filename: string;
+    url: string;
+    productId?: number;
+    serviceId?: number;
 }

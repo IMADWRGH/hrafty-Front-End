@@ -17,9 +17,14 @@ export class AddProductComponent {
   editProduct: Product;
   isEditMode: boolean = false;
   productForm: FormGroup;
+  selectedFiles: File[] = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ps: ProductService, private fb: FormBuilder, private ref: MatDialogRef<AddProductComponent>) {
-  }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private ps: ProductService,
+    private fb: FormBuilder,
+    private ref: MatDialogRef<AddProductComponent>
+  ) { }
 
   ngOnInit(): void {
     this.inputdata = this.data;
@@ -28,7 +33,6 @@ export class AddProductComponent {
     }
     this.productForm = this.fb.group({
       id: [null],
-      image: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, Validators.required],
@@ -41,24 +45,45 @@ export class AddProductComponent {
   }
 
   onSubmit(): void {
-    const productData = {
-      ...this.productForm.value,
-      sellerId: this.sellerId
-    };
+    if (this.productForm.valid) {
+      const formData = this.createFormData();
 
-    if (this.isEditMode) {
-      this.ps.updateProduct(productData).subscribe({
-        next: (res) => {
-          this.closepopup();
-        }
-      });
-    } else {
-      this.ps.addProduct(productData).subscribe({
-        next: (res) => {
-          this.closepopup();
-        }
-      });
+      if (this.isEditMode) {
+        this.ps.updateProduct(formData).subscribe({
+          next: (res) => {
+            this.closepopup();
+          }
+        });
+      } else {
+        this.ps.addProduct(formData).subscribe({
+          next: (res) => {
+            this.closepopup();
+          }
+        });
+      }
     }
+  }
+
+  createFormData(): FormData {
+    const formData = new FormData();
+    const formValue = this.productForm.value;
+    const product = {
+      sellerId: this.sellerId,
+      name: formValue.name,
+      description: formValue.description,
+      price: formValue.price,
+      category: formValue.category
+    };
+    if (this.isEditMode && formValue.id) {
+      product['id'] = formValue.id;
+    }
+    formData.append('product', new Blob([JSON.stringify(product)], {
+      type: "application/json"
+    }));
+    this.selectedFiles.forEach((file, index) => {
+      formData.append('files', file, file.name);
+    });
+    return formData;
   }
 
   closepopup() {
@@ -69,9 +94,8 @@ export class AddProductComponent {
     this.ps.getProduct(id).subscribe({
       next: (res) => {
         this.editProduct = res;
-        this.productForm.setValue({
+        this.productForm.patchValue({
           id: this.editProduct.id,
-          image: this.editProduct.image,
           name: this.editProduct.name,
           description: this.editProduct.description,
           price: this.editProduct.price,
@@ -81,4 +105,11 @@ export class AddProductComponent {
     });
   }
 
+  onFilesSelected(event: any) {
+    this.selectedFiles = Array.from(event.target.files);
+  }
+
+  clearFiles() {
+    this.selectedFiles = [];
+  }
 }

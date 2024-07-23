@@ -106,10 +106,9 @@
                 class="nav-link d-flex align-items-center"
               >
                 <img
-                  [src]="customer?.imageURL"
-                  class="profile-image rounded-circle"
-                  width="30"
-                  height="30"
+               *ngIf="customer"
+                 [src]="customer.imageURL"
+                 class="profile-image"
                 />
                 <span class="ms-2 text-white">{{ user?.fullName }}</span>
               </button>

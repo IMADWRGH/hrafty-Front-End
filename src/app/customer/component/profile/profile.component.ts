@@ -13,7 +13,7 @@ export class ProfileComponent {
   userId = UserStorageService.getUserId()
   constructor(private customerService:CustomerService){}
   ngOnInit() {
-    this.getCustomer();
+    
   }
   getCustomer() {
     this.customerService.getCustomerData(this.userId).subscribe(

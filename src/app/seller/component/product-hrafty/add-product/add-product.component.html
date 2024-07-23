@@ -1,40 +1,60 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="form-container">
-  <h1 mat-dialog-title>{{ inputdata.title }}</h1>
-  <div mat-dialog-content class="form-content">
-    <mat-form-field appearance="fill">
-      <mat-label>Image</mat-label>
+  <h1 class="form-title">{{ inputdata.title }}</h1>
+  
+  <div class="form-content">
+    <div class="file-upload-container">
+      <label for="fileInput" class="file-upload-label">
+        <span class="file-upload-icon">📁</span>
+        <span>Drag & drop images here or click to select</span>
+      </label>
       <input
-        formControlName="name"
-        matInput
-        placeholder="Enter product image"
+        id="fileInput"
+        type="file"
+        (change)="onFilesSelected($event)"
+        multiple
+        #fileInput
+        class="file-input"
       />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
+      <div *ngIf="selectedFiles.length > 0" class="selected-files">
+        <span>{{ selectedFiles.length }} file(s) selected</span>
+        <button type="button" class="clear-files-btn" (click)="clearFiles()">Clear</button>
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline" class="form-field">
       <mat-label>Name</mat-label>
-      <input formControlName="name" matInput placeholder="Enter product name" />
+      <input formControlName="name" matInput placeholder="Enter product name" required>
+      <mat-error *ngIf="productForm.get('name').invalid">Name is required</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+
+    <mat-form-field appearance="outline" class="form-field">
       <mat-label>Category</mat-label>
-      <input formControlName="category" matInput placeholder="Enter product category" />
+      <input formControlName="category" matInput placeholder="Enter product category" required>
+      <mat-error *ngIf="productForm.get('category').invalid">Category is required</mat-error>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
       <mat-label>Price</mat-label>
-      <input formControlName="price" matInput placeholder="Enter price" />
+      <input formControlName="price" matInput type="number" placeholder="Enter price" required>
+      <span matPrefix>&nbsp;$&nbsp;</span>
+      <mat-error *ngIf="productForm.get('price').invalid">Valid price is required</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+
+    <mat-form-field appearance="outline" class="form-field description-field">
       <mat-label>Description</mat-label>
       <textarea
         formControlName="description"
         matInput
         placeholder="Enter description"
-        rows="5"
+        rows="2"
+        required
       ></textarea>
+      <mat-error *ngIf="productForm.get('description').invalid">Description is required</mat-error>
     </mat-form-field>
   </div>
-  <div mat-dialog-actions class="dialog-actions">
-    <button mat-raised-button type="submit" color="primary">Save</button>
-    <button type="button" mat-raised-button color="warn" (click)="closepopup()">
-      Close
-    </button>
+
+  <div class="form-actions">
+    <button mat-raised-button type="submit" color="primary" class="submit-btn">Save</button>
+    <button type="button" mat-raised-button color="warn" (click)="closepopup()" class="close-btn">Close</button>
   </div>
 </form>

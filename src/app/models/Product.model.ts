@@ -1,9 +1,10 @@
+import { Image } from "./Image.model";
 export interface Product {
     id?: number;
-    name?: string;
-    image:string;
-    description?: string;
-    price?: number;
-    category?:string;
-    sellerId?: number;
+    images?: Image[];
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    sellerId: number;
 }
