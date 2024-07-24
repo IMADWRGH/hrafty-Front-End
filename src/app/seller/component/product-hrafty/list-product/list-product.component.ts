@@ -42,6 +42,8 @@ export class ListProductComponent implements OnInit {
     this.productService.getProducts(this.sellerId).subscribe({
       next: (response: Product[]) => {
         this.products = response;
+        console.log(response);
+        
         this.datasource = new MatTableDataSource<Product>(this.products);
         this.datasource.paginator = this.paginator;
         this.datasource.sort = this.sort;

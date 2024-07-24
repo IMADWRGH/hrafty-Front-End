@@ -37,6 +37,7 @@ export class AddProductComponent {
       description: ['', Validators.required],
       price: [0, Validators.required],
       category: ['', Validators.required],
+      sellerId: [this.sellerId]
     });
     if (this.inputdata && this.inputdata.service) {
       this.isEditMode = true;
@@ -46,44 +47,32 @@ export class AddProductComponent {
 
   onSubmit(): void {
     if (this.productForm.valid) {
-      const formData = this.createFormData();
+      const formValue = this.productForm.value;
+      const product = {
+        sellerId: this.sellerId,
+        name: formValue.name,
+        description: formValue.description,
+        price: formValue.price,
+        category: formValue.category
+      };
+      if (this.isEditMode && formValue.id) {
+        product['id'] = formValue.id;
+      }
 
       if (this.isEditMode) {
-        this.ps.updateProduct(formData).subscribe({
+        this.ps.updateProduct(product, this.selectedFiles).subscribe({
           next: (res) => {
             this.closepopup();
           }
         });
       } else {
-        this.ps.addProduct(formData).subscribe({
+        this.ps.addProduct(product, this.selectedFiles).subscribe({
           next: (res) => {
             this.closepopup();
           }
         });
       }
     }
-  }
-
-  createFormData(): FormData {
-    const formData = new FormData();
-    const formValue = this.productForm.value;
-    const product = {
-      sellerId: this.sellerId,
-      name: formValue.name,
-      description: formValue.description,
-      price: formValue.price,
-      category: formValue.category
-    };
-    if (this.isEditMode && formValue.id) {
-      product['id'] = formValue.id;
-    }
-    formData.append('product', new Blob([JSON.stringify(product)], {
-      type: "application/json"
-    }));
-    this.selectedFiles.forEach((file, index) => {
-      formData.append('files', file, file.name);
-    });
-    return formData;
   }
 
   closepopup() {

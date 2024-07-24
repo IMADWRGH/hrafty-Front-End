@@ -1,18 +1,11 @@
 <mat-card [ngClass]="{ 'text-center': !fullWidthMode }">
   <div [ngClass]="{ flex: fullWidthMode }">
-    <!-- <img
-      [src]="product?.image"
-      alt="image of product"
-      class="mb-1 mx-auto h-200"
-      style="height: 200px"
-      [ngClass]="{ 'h-200': !fullWidthMode, 'h-360px': fullWidthMode }"
-    /> -->
     <img
-      src="/assets/images/img1.jpg"
+      [src]="product?.images[0]?.url"
       alt="image of product"
       class="mb-1 mx-auto h-200"
       style="height: 200px"
-      [ngClass]="{ 'h-200': !fullWidthMode, 'h-360px': fullWidthMode }"
+      [ngStyle]="{ height: fullWidthMode ? '360px' : '200px' }"
     />
     <div
       class="w-100"

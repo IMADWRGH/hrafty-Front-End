@@ -38,9 +38,7 @@ export class HeaderSellerComponent {
   getSeller() {
     this.sellerService.getSellerData(this.userId).subscribe(
       (data: Seller) => {
-        this.seller = data;
-        console.log(data);
-        
+        this.seller = data;        
       },
       (error) => {
         console.log(error);
