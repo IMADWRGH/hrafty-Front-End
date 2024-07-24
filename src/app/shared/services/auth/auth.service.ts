@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { Auth } from 'src/app/models/Auth.model';
-import { Customer } from 'src/app/models/Customer.model';
 import { Seller } from 'src/app/models/Seller.model';
 import { User } from 'src/app/models/User.model';
 import { UserStorageService } from '../storage/user-storage.service';
@@ -35,16 +34,30 @@ export class AuthService {
   }
 
 
-  // registerCustomer(request: Auth): Observable<Customer> {
-  //   return this.http.post<Customer>(`${API_URL}/register-customer`, request);
-  // }
+ 
   
   registerCustomers(formData: FormData): Observable<any> {
     return this.http.post(`${API_URL}/register-customer`, formData, {
       headers: new HttpHeaders({ 'Accept': 'application/json' }),
       withCredentials: false 
-    });
+    }).pipe(
+      catchError(this.handleError)
+    );
   }
+  registerSeller(formData: FormData): Observable<Seller> {
+    return this.http.post<Seller>(`${API_URL}/register-seller`, formData);
+  }
+  singup(user: User): Observable<User> {
+    return this.http.post<User>(`${API_URL}`, user);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 409) {
+      return throwError(() => new Error('Email already exists'));
+    }
+    return throwError(() => new Error('Something went wrong. Please try again later.'));
+  }
+
   // registe(user: User, customer: Customer, file: File): Observable<any> {
   //   const formData = new FormData();
   //   formData.append('user', JSON.stringify(user));
@@ -54,10 +67,8 @@ export class AuthService {
   //   return this.http.post<any>(`${API_URL}/register-customer`, formData);
   // }
 
-  registerSeller(formData: FormData): Observable<Seller> {
-    return this.http.post<Seller>(`${API_URL}/register-seller`, formData);
-  }
-  singup(user: User): Observable<User> {
-    return this.http.post<User>(`${API_URL}`, user);
-  }
+
+  // registerCustomer(request: Auth): Observable<Customer> {
+  //   return this.http.post<Customer>(`${API_URL}/register-customer`, request);
+  // }
 }

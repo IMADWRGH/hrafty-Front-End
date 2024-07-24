@@ -1,8 +1,9 @@
+import { Image } from "./Image.model";
 export interface Service {
     id: number;
     name: string;
     description: string;
-    image: string;
+    images: Image[];
     price: number;
     category: string;
     status: boolean;

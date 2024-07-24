@@ -20,6 +20,7 @@ export class AddServiceComponent implements OnInit {
   isEditMode: boolean = false;
   serviceForm?: FormGroup;
   sellerId: number;
+  selectedFiles: File[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -36,7 +37,6 @@ export class AddServiceComponent implements OnInit {
     }
     this.serviceForm = this.fb.group({
       id: [null],
-      image: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, Validators.required],
@@ -62,41 +62,47 @@ export class AddServiceComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.sellerId) {
-      console.log('Seller ID not available yet.');
-      return;
-    }
+    if (this.serviceForm.valid) {
+      const formValue = this.serviceForm.value;
+      const service = {
+        ...formValue,
+        sellerId: this.sellerId
+      };
 
-    const serviceData = {
-      ...this.serviceForm.value,
-      sellerId: this.sellerId
-    };
-
-    if (this.isEditMode) {
-      this.service.updateService(serviceData).subscribe({
-        next: (res) => {
-          this.closepopup();
-          console.log(res);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-    } else {
-      this.service.addService(serviceData).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.closepopup();
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
+      if (this.isEditMode) {
+        this.service.updateService(service, this.selectedFiles).subscribe({
+          next: (res) => {
+            this.closepopup();
+            console.log(res);
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
+      } else {
+        this.service.addService(service, this.selectedFiles).subscribe({
+          next: (res) => {
+            console.log(res);
+            this.closepopup();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
+      }
     }
   }
 
   closepopup() {
     this.ref.close('Closed using function');
+  }
+
+  onFilesSelected(event: any) {
+    this.selectedFiles = Array.from(event.target.files);
+  }
+
+  clearFiles() {
+    this.selectedFiles = [];
   }
 
   setpopudate(id: number) {
@@ -105,11 +111,10 @@ export class AddServiceComponent implements OnInit {
         this.editService = res;
         this.serviceForm.setValue({
           id: this.editService.id,
-          image: this.editService.image,
           name: this.editService.name,
           description: this.editService.description,
           price: this.editService.price,
-          category:this.editService.category,
+          category: this.editService.category,
           status: this.editService.status
         });
       },

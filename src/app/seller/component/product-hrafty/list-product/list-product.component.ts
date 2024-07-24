@@ -94,7 +94,7 @@ export class ListProductComponent implements OnInit {
     const _add = this.dialog.open(AddProductComponent, {
       exitAnimationDuration: '1000ms',
       width: '80%',
-      height: '80%',
+      height: '90%',
       data: {
         title: title,
         id: id

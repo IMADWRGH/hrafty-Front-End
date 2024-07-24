@@ -14,6 +14,7 @@ export class CustomerRegistrationComponent {
   userSignupFormGroup: FormGroup;
   hidePassword = true;
   selectedFile: File | null = null;
+  EmailError: string = '';
 
   constructor(private formBuilder: FormBuilder,private auth: AuthService,private rout:Router) { }
 
@@ -59,16 +60,20 @@ export class CustomerRegistrationComponent {
       formData.append('file', this.selectedFile, this.selectedFile.name);
     }
     console.log(formData);
-    this.auth.registerCustomers(formData).subscribe(
-      response => {
-        
-        console.log('User registered successfully', response);
+    this.auth.registerCustomers(formData).subscribe({
+      next: (data) => {
+        console.log('User registered successfully', data);
         this.rout.navigate(['/login']);
       },
-      error => {
-        console.error('Error registering user', error);
+      error: (err) => {
+        if (err.error === 'Email already exist') {
+          this.EmailError = 'Email already exist';
+        }else {
+          this.EmailError = 'An unexpected error occurred. Please try again later.';
+        }
+        console.error('Error registering user', err);
       }
-    );
+    })
   }
 
 
