@@ -62,7 +62,7 @@ export class CustomerRegistrationComponent {
     console.log(formData);
     this.auth.registerCustomers(formData).subscribe({
       next: (data) => {
-        console.log('User registered successfully', data);
+        // console.log('User registered successfully', data);
         this.rout.navigate(['/login']);
       },
       error: (err) => {
@@ -71,7 +71,6 @@ export class CustomerRegistrationComponent {
         }else {
           this.EmailError = 'An unexpected error occurred. Please try again later.';
         }
-        console.error('Error registering user', err);
       }
     })
   }

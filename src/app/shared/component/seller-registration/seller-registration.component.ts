@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class SellerRegistrationComponent implements OnInit {
   submitted: boolean = false;
   selectedFile: File | null = null;
+  EmailError: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,9 +80,12 @@ export class SellerRegistrationComponent implements OnInit {
         this.router.navigate(['/login']);
         console.log('Seller registered successfully', data);
       },
-      error: error => {
-        console.error('Error registering seller:', error);
-        catchError(error);
+      error: (err) => {
+        if (err.error === 'Email already exist') {
+          this.EmailError = 'Email already exist';
+        } else {
+          this.EmailError = 'An unexpected error occurred. Please try again later.';
+        }
       },
       complete: () => {
         console.log('Registration complete');

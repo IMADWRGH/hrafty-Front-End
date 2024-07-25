@@ -40,22 +40,13 @@ export class AuthService {
     return this.http.post(`${API_URL}/register-customer`, formData, {
       headers: new HttpHeaders({ 'Accept': 'application/json' }),
       withCredentials: false 
-    }).pipe(
-      catchError(this.handleError)
-    );
+    })
   }
   registerSeller(formData: FormData): Observable<Seller> {
     return this.http.post<Seller>(`${API_URL}/register-seller`, formData);
   }
   singup(user: User): Observable<User> {
     return this.http.post<User>(`${API_URL}`, user);
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 409) {
-      return throwError(() => new Error('Email already exists'));
-    }
-    return throwError(() => new Error('Something went wrong. Please try again later.'));
   }
 
   // registe(user: User, customer: Customer, file: File): Observable<any> {

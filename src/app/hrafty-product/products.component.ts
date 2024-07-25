@@ -41,12 +41,12 @@ export class ProductsComponent {
   // product: product.images,
   onAddToCart(product: Product): void {
     this.cartService.addTocart({
-     product: null,
+      id: product.id,
       name: product.name,
       price: product.price,
       quantity: 1,
-      id: product.id
-    })
+      product: product.images[0].url
+    });
   }
 
   getProduct(): void {

@@ -15,5 +15,7 @@ export class ProductBoxComponent {
   constructor(private route: Router) { }
   onAddToCart() {
       this.addToCart.emit(this.product);
+      console.log('add product to cart '+this.addToCart);
+      
   }
 }

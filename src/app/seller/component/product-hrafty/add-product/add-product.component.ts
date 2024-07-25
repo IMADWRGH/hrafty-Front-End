@@ -49,6 +49,7 @@ export class AddProductComponent {
     if (this.productForm.valid) {
       const formValue = this.productForm.value;
       const product = {
+        id:this.editProduct.id,
         sellerId: this.sellerId,
         name: formValue.name,
         description: formValue.description,
@@ -60,7 +61,7 @@ export class AddProductComponent {
       }
 
       if (this.isEditMode) {
-        this.ps.updateProduct(product, this.selectedFiles).subscribe({
+        this.ps.updateProduct(product.id,product).subscribe({
           next: (res) => {
             this.closepopup();
           }
