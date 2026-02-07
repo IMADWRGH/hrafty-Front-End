@@ -8,18 +8,21 @@ import { Cart, CartItem } from 'src/app/models/Cart.model';
 })
 export class CartService {
 
-  cart = new BehaviorSubject<Cart>({ items: [] });
+  private _cart = new BehaviorSubject<Cart>({ items: [] });
+  cart=this._cart.asObservable();
   constructor(private _sanckBar: MatSnackBar) { }
 
   addTocart(item: CartItem): void {
-    const items = [...this.cart.value.items];
+    console.log('CartService: Adding item to cart', item);
+    const items = [...this._cart.value.items];
     const itemInCart = items.find((_item) => _item.id === item.id);
     if (itemInCart) {
       itemInCart.quantity += 1;
     } else {
       items.push(item);
     }
-    this.cart.next({ items });
+    console.log('CartService: New cart items', items);
+    this._cart.next({ items });
     this._sanckBar.open('1 item added to cart', 'Ok', { duration: 3000 });
   }
 
@@ -28,7 +31,7 @@ export class CartService {
   removeQuantity(item: CartItem): void {
     let itemForRemoval!: CartItem;
 
-    let filteredItems = this.cart.value.items.map((_item) => {
+    let filteredItems = this._cart.value.items.map((_item) => {
       if (_item.id === item.id) {
         _item.quantity--;
         if (_item.quantity === 0) {
@@ -43,7 +46,7 @@ export class CartService {
       filteredItems = this.removeFromCart(itemForRemoval, false);
     }
 
-    this.cart.next({ items: filteredItems });
+    this._cart.next({ items: filteredItems });
     this._sanckBar.open('1 item removed from cart.', 'Ok', {
       duration: 3000,
     });
@@ -59,16 +62,16 @@ export class CartService {
 
 
   ClearCart(): void {
-    this.cart.next({ items: [] });
+    this._cart.next({ items: [] });
     this._sanckBar.open('cart is cleared', 'ok', { duration: 3000 });
   }
 
 
 
   removeFromCart(item: CartItem, update = true): Array<CartItem> {
-    const filteredItem = this.cart.value.items.filter((_item) => _item.id !== item.id);
+    const filteredItem = this._cart.value.items.filter((_item) => _item.id !== item.id);
     if (update) {
-      this.cart.next({ items: filteredItem });
+      this._cart.next({ items: filteredItem });
       this._sanckBar.open('1 item removed from cart', 'ok', { duration: 3000 });
     }
 
