@@ -16,7 +16,6 @@ export class CartComponent {
     'product',
     'name',
     'price',
-    'category',
     'quantity',
     'total',
     'action'
@@ -28,6 +27,7 @@ export class CartComponent {
 
   ngOnInit(): void {
     this.cartSubscription = this.cartService.cart.subscribe((_cart: Cart) => {
+      console.log('CartComponent: Received new cart', _cart);
       this.cart = _cart;
       this.dataSource = _cart.items;
     });
