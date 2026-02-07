@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
     this.data.search(city, category).subscribe({
       next: (results: Service[]) => {
         this.data.updateSearchResults(results);
-        this.route.navigate(['/test']);
+        this.route.navigate(['/details-service']);
       },
       error: (err) => {
         console.log(err);
