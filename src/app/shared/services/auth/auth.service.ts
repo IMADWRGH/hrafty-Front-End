@@ -5,8 +5,9 @@ import { Auth } from 'src/app/models/Auth.model';
 import { Seller } from 'src/app/models/Seller.model';
 import { User } from 'src/app/models/User.model';
 import { UserStorageService } from '../storage/user-storage.service';
+import { environment } from 'src/environments/environment';
 
-const API_URL = "http://localhost:8080/api/v1/auth";
+const API_URL = `${environment.apiBaseUrl}/auth`;
 
 @Injectable({
   providedIn: 'root'
@@ -34,12 +35,12 @@ export class AuthService {
   }
 
 
- 
-  
+
+
   registerCustomers(formData: FormData): Observable<any> {
     return this.http.post(`${API_URL}/register-customer`, formData, {
       headers: new HttpHeaders({ 'Accept': 'application/json' }),
-      withCredentials: false 
+      withCredentials: false
     })
   }
   registerSeller(formData: FormData): Observable<Seller> {
