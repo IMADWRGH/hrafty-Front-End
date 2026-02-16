@@ -12,7 +12,6 @@ import { ContactComponent } from './contact/contact.component';
 import { ProductsComponent } from './hrafty-product/products.component';
 import { CartComponent } from './cart/cart.component';
 import { DetailsServicesComponent } from './home/details-services/details-services.component';
-import { TestComponent } from './shared/component/test/test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', title: 'Home - page' },
@@ -22,11 +21,10 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent, title: 'Contact - page' },
   { path: 'products', component: ProductsComponent, title: 'Products - page' },
   { path: 'cart', component: CartComponent, title: 'Cart - page' },
-  { path: 'singup', component: ChooseRegistrationComponent, title: 'Singup - page' },
+  { path: 'signup', component: ChooseRegistrationComponent, title: 'Signup - page' },
   { path: 'seller-register', component: SellerRegistrationComponent },
   { path: 'customer-register', component: CustomerRegistrationComponent },
   { path: 'details-service', component: DetailsServicesComponent },
-  { path: 'test', component: TestComponent },
   {
     path: 'seller',
     loadChildren: () =>
