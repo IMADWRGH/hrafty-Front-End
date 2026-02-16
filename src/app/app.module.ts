@@ -23,7 +23,6 @@ import { ProductBoxComponent } from './hrafty-product/components/product-box/pro
 import { CartComponent } from './cart/cart.component';
 import { DetailsServicesComponent } from './home/details-services/details-services.component';
 import { ConformationDialogComponent } from './shared/component/conformation-dialog/conformation-dialog.component';
-import { TestComponent } from './shared/component/test/test.component';
 import { CustomerModule } from './customer/customer.module';
 import { SellerModule } from './seller/seller.module';
 
@@ -44,8 +43,7 @@ import { SellerModule } from './seller/seller.module';
     ProductBoxComponent,
     CartComponent,
     DetailsServicesComponent,
-    ConformationDialogComponent,
-    TestComponent,
+    ConformationDialogComponent
   ],
   imports: [
     BrowserModule,
