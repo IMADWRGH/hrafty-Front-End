@@ -1,12 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles & Design System */
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
+:root {
+    /* Colors */
+    --primary-color: #645bff;
+    --primary-dark: #4a3fcf;
+    --accent-color: #e040fb;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --bg-dark: #0f0c29;
+    --bg-gradient: linear-gradient(135deg, #0f0c29 0%, #1a1a3e 50%, #24243e 100%);
+
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --blur-amount: 10px;
+
+    /* Spacing */
+    --header-height: 80px;
+}
+
+html,
 body {
-    height: 100%;
+    min-height: 100%;
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-image: url('/assets/images/bg-image.jpg');
+    font-family: 'Inter', Roboto, "Helvetica Neue", sans-serif;
+    background: var(--bg-dark);
+    /* Fallback */
+    background-image: var(--bg-gradient);
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #3a3f5c var(--bg-dark);
+    /* Firefox */
+}
+
+/* Scrollbar (Webkit) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3a3f5c;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }
