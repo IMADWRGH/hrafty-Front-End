@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Address } from 'src/app/models/Address.model';
 import { Seller } from 'src/app/models/Seller.model';
+import { environment } from 'src/environments/environment';
 
-const API_URL = "http://localhost:8080/api/v1/seller/";
-const API = "http://localhost:8080/api/v1/address/";
+const API_URL = `${environment.apiBaseUrl}/seller/`;
+const API = `${environment.apiBaseUrl}/address/`;
 
 
 @Injectable({
@@ -13,15 +14,15 @@ const API = "http://localhost:8080/api/v1/address/";
 })
 export class SellerService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
 
-  getSellerData(id:number):Observable<Seller>{
-    return this.http.get<Seller>(API_URL+id);
+  getSellerData(id: number): Observable<Seller> {
+    return this.http.get<Seller>(API_URL + id);
   }
 
-  getAddressSeller(id:number):Observable<Address>{
-    return this.http.get<Address>(API+id);
+  getAddressSeller(id: number): Observable<Address> {
+    return this.http.get<Address>(API + id);
   }
 }
