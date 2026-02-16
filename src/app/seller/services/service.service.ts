@@ -2,8 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Service } from 'src/app/models/Service.model';
+import { environment } from 'src/environments/environment';
 
-const API_URL = "http://localhost:8080/api/v1/seller/";
+const API_URL = `${environment.apiBaseUrl}/seller/`;
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,10 @@ export class ServiceService {
     return this.http.post<Service>(`${API_URL}add`, formData, { headers });
   }
 
-  deleteService(id:number){
+  deleteService(id: number) {
     return this.http.delete(API_URL + "delete/" + id);
   }
-  updateService(service:Service,files:File[]){
+  updateService(service: Service, files: File[]) {
     const formData: FormData = new FormData();
     formData.append('service', JSON.stringify(service));
     files.forEach(file => formData.append('files', file, file.name));
