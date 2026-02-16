@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Product } from 'src/app/models/Product.model';
-const API_URL = "http://localhost:8080/api/v1/user/";
+import { environment } from 'src/environments/environment';
+
+const API_URL = `${environment.apiBaseUrl}/user/`;
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +25,7 @@ export class StoreService {
   //     })
   //   );
   // }
-  
+
   getAllCategories(): Observable<Array<string>> {
     return this.http.get<Array<string>>(`${API_URL}product-categories`);
   }
