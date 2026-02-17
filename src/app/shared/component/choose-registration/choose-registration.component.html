@@ -1,26 +1,59 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <mat-card class="choice-card" (click)="register('artisan')">
-        <mat-card-header>
-          <mat-card-title>Artisan</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image src="/assets/images/seller.png" alt="Artisan" class="mb-5">
-        <mat-card-content>
-          <p>Join as an artisan to showcase and sell your handcrafted products.</p>
-        </mat-card-content>
-      </mat-card>
+<div class="registration-choice-page">
+  <!-- Animated background shapes (inherited from login style) -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <div class="container content-wrapper">
+    <div class="text-center mb-5 header-section">
+      <h1 class="page-title">Join Hrafty</h1>
+      <p class="page-subtitle">Choose how you want to get started</p>
     </div>
-    <div class="col-md-6">
-      <mat-card class="choice-card" (click)="register('customer')">
-        <mat-card-header>
-          <mat-card-title>Customer</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image src="/assets/images/customer.png" alt="Customer" class="mb-5">
-        <mat-card-content>
-          <p>Sign up as a customer to discover and purchase unique artisan products.</p>
-        </mat-card-content>
-      </mat-card>
+
+    <div class="cards-container">
+      <!-- Artisan/Seller Card -->
+      <div class="choice-card artisan-card" (click)="register('artisan')">
+        <div class="card-content">
+          <div class="icon-wrapper">
+            <mat-icon>storefront</mat-icon>
+          </div>
+          <h2 class="card-title">I'm an Artisan</h2>
+          <p class="card-desc">
+            Sell your unique handcrafted creations to a global audience.
+            Manage your shop, track orders, and grow your business.
+          </p>
+          <button mat-flat-button class="action-btn">
+            Become a Seller
+            <mat-icon iconPositionEnd>arrow_forward</mat-icon>
+          </button>
+        </div>
+        <div class="card-bg-image seller-bg"></div>
+      </div>
+
+      <!-- Customer Card -->
+      <div class="choice-card customer-card" (click)="register('customer')">
+        <div class="card-content">
+          <div class="icon-wrapper">
+            <mat-icon>shopping_bag</mat-icon>
+          </div>
+          <h2 class="card-title">I'm a Customer</h2>
+          <p class="card-desc">
+            Discover authentic Moroccan treasures.
+            Connect with talented artisans and support local craftsmanship.
+          </p>
+          <button mat-flat-button class="action-btn">
+            Start Shopping
+            <mat-icon iconPositionEnd>arrow_forward</mat-icon>
+          </button>
+        </div>
+        <div class="card-bg-image customer-bg"></div>
+      </div>
+    </div>
+
+    <div class="mt-5 text-center login-link-section">
+      <p>Already have an account? <a routerLink="/login" class="text-link">Log in</a></p>
     </div>
   </div>
 </div>

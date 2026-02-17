@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 })
 export class ChooseRegistrationComponent {
 
-  constructor(private route: Router) { }
+  constructor(private router: Router) { }
 
-  register(type: string) {
+  register(type: string): void {
     if (type === 'customer') {
-      this.route.navigate(['/customer-register'])
+      this.router.navigate(['/customer-register']);
     } else {
-      this.route.navigate(['/seller-register'])
+      this.router.navigate(['/seller-register']);
     }
   }
 }
