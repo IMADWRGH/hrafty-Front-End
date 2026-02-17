@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Cart, CartItem } from 'src/app/models/Cart.model';
+import { Subject, takeUntil } from 'rxjs';
 import { Seller } from 'src/app/models/Seller.model';
-import { CartService } from 'src/app/shared/services/service/cart.service';
 import { UserStorageService } from 'src/app/shared/services/storage/user-storage.service';
 import { SellerService } from '../../services/seller.service';
 
@@ -11,44 +10,55 @@ import { SellerService } from '../../services/seller.service';
   templateUrl: './header-seller.component.html',
   styleUrls: ['./header-seller.component.css']
 })
-export class HeaderSellerComponent {
-  userId = UserStorageService.getUserId()
-  private _cart: Cart = { items: [] };
-  itemsQuantity = 0;
+export class HeaderSellerComponent implements OnInit, OnDestroy {
+  userId = UserStorageService.getUserId();
   seller?: Seller;
-
-  constructor(private route: Router, private cartService: CartService, private sellerService:SellerService ) { }
-
-  isCustomerLoggedIn: boolean;
-  isSellerLoggedIn: boolean;
+  isCustomerLoggedIn = false;
+  isSellerLoggedIn = false;
+  isMenuOpen = false;
   user = UserStorageService.getUser();
+
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private router: Router,
+    private sellerService: SellerService
+  ) { }
+
   ngOnInit(): void {
     this.getSeller();
-    this.route.events.subscribe(event => {
-      this.isCustomerLoggedIn = UserStorageService.isCustomerLoggedIn();
-      this.isSellerLoggedIn = UserStorageService.isSellerLoggedIn();
-    })
+    this.router.events
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.isCustomerLoggedIn = UserStorageService.isCustomerLoggedIn();
+        this.isSellerLoggedIn = UserStorageService.isSellerLoggedIn();
+      });
   }
 
-  logOut() {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  logOut(): void {
     UserStorageService.signOut();
-    this.route.navigateByUrl('login');
+    this.router.navigateByUrl('login');
   }
 
-  getSeller() {
-    this.sellerService.getSellerData(this.userId).subscribe(
-      (data: Seller) => {
-        this.seller = data;        
+  getSeller(): void {
+    this.sellerService.getSellerData(this.userId).subscribe({
+      next: (data: Seller) => {
+        this.seller = data;
       },
-      (error) => {
-        console.log(error);
+      error: (error) => {
+        console.error('Failed to load seller data:', error);
       }
-    );
+    });
   }
 
-
-  // getSellerImage():string  {
-  //   return this.seller.image && this.seller.image.trim() !== '' ? this.seller.image : '/assets/images/profile.png';
-  // }
-
+  getSellerImage(): string {
+    return this.seller?.imageURL && this.seller.imageURL.trim() !== ''
+      ? this.seller.imageURL
+      : '/assets/images/profile.png';
+  }
 }
