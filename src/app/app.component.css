@@ -12,6 +12,8 @@ body {
 
 .content {
     flex: 1 0 auto;
+    padding-top: var(--header-height);
+    width: 100%;
 }
 
 app-footer {
