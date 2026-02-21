@@ -37,6 +37,12 @@
     opacity: 0.9;
 }
 
+.logo-img {
+    max-height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
 .brand-icon {
     font-size: 32px;
     width: 32px;
