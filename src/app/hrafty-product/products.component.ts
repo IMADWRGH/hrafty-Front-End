@@ -40,12 +40,13 @@ export class ProductsComponent {
   }
   // product: product.images,
   onAddToCart(product: Product): void {
+    console.log('ProductsComponent: Received product', product);
     this.cartService.addTocart({
-      id: product.id,
+      id: product.id ?? 0, // Use 0 if id is undefined
       name: product.name,
       price: product.price,
       quantity: 1,
-      product: product.images[0].url
+      product: product.images && product.images.length > 0 ? product.images[0].url : ''
     });
   }
 
