@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Service } from 'src/app/models/Service.model';
+import { SellerService } from 'src/app/seller/services/seller.service';
 import { SearchService } from 'src/app/shared/services/service/search.service';
+import { UserStorageService } from 'src/app/shared/services/storage/user-storage.service';
 
 @Component({
   selector: 'app-details-services',
@@ -8,39 +10,18 @@ import { SearchService } from 'src/app/shared/services/service/search.service';
   styleUrls: ['./details-services.component.css']
 })
 export class DetailsServicesComponent {
-  constructor(private serch:SearchService){}
+  constructor(private serch: SearchService, private sellerService: SellerService){}
   cards:Service[]=[];
-  card = [
-    {
-      title: 'Shiba Inu',
-      subtitle: 'Dog Breed',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      description: `The Shiba Inu is the smallest of the six original and distinct spitz
-                    breeds of dog from Japan. A small, agile dog that copes very well with
-                    mountainous terrain, the Shiba Inu was originally bred for hunting.`,
-      location: 'Casa'
-    },
-    {
-      title: 'Akita Inu',
-      subtitle: 'Dog Breed',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      description: `The Akita Inu is a large breed of dog originating from the mountainous northern regions of Japan.`,
-      location: 'Tokyo'
-    },
-    {
-      title: 'Hokkaido',
-      subtitle: 'Dog Breed',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      description: `The Hokkaido is a breed of dog known for its hunting abilities and its ability to cope with harsh winters.`,
-      location: 'Hokkaido'
-    }
-  ];
+  card =[];
+  userId = UserStorageService.getUserId()
 
   ngOnInit(){
     this.serch.searchResults$.subscribe(
       {
         next: (data) => {
           this.cards = data;
+          console.log(data);
+          
         },
         error: (error) => {
           console.log(error);
@@ -48,4 +29,6 @@ export class DetailsServicesComponent {
       }
     );
   }
+
+
 }

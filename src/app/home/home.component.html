@@ -34,20 +34,22 @@
     </div>
   </div>
 
- <div class="row justify-content-center">
-  <div class="col-md-2 col-sm-4 mb-4" *ngFor="let item of items">
-    <div class="card text-center shadow" (click)="onCategoryClick(item.category)">
-      <img [src]="item.image" class="card-img-top rounded-circle p-2" alt="..." />
-      <div class="card-body">
-        <div class="card-text">{{ item.category }}</div>
+  <div class="row justify-content-center">
+    <div class="col-md-2 col-sm-4 mb-4" *ngFor="let item of items">
+      <div class="card text-center shadow" (click)="onCategoryClick(item.category)">
+        <img [src]="item.image" class="card-img-top rounded-circle p-2" alt="..." />
+        <div class="card-body">
+          <div class="card-text">{{ item.category }}</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div class="details-service" *ngIf="selectedCategory">
     <div class="row">
-      <div class="text-center"><h1>List of {{selectedCategory}}</h1></div>
+      <div class="text-center">
+        <h1>List of {{selectedCategory}}</h1>
+      </div>
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let card of cards">
         <mat-card class="card shadow" appearance="outlined">
           <mat-card-header>
