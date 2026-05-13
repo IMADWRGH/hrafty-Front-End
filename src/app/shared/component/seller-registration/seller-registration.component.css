@@ -1,49 +1,300 @@
-.container-fluid .mat-card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-
+/* Page Layout */
+.registration-page {
+    min-height: 100vh;
+    padding: 120px 1rem 4rem;
+    /* Top padding for fixed header */
+    position: relative;
 }
 
-.container-fluid .fs-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    font-weight: 500;
+/* Background Shapes */
+.bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
 }
 
-.container-fluid .mat-form-field {
-    width: 100%;
-    margin-bottom: 20px;
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    animation: float 8s ease-in-out infinite;
 }
 
-.container-fluid .form-group {
-    margin-bottom: 20px;
+.shape-1 {
+    width: 500px;
+    height: 500px;
+    background: #645bff;
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
 }
 
-.container-fluid .text-center {
-    text-align: center;
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    background: #e040fb;
+    bottom: -100px;
+    right: -100px;
+    animation-delay: 3s;
 }
 
-.container-fluid button {
-    margin-right: 10px;
+.shape-3 {
+    width: 300px;
+    height: 300px;
+    background: #00bcd4;
+    top: 30%;
+    right: 20%;
+    animation-delay: 5s;
 }
 
-.container-fluid .invalid-feedback {
-    color: #f44336;
-    font-size: 0.875em;
-}
+@keyframes float {
 
-.container-fluid input.is-invalid {
-    border-color: #f44336;
-}
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
 
-@media (max-width: 768px) {
-    .container-fluid .mat-card {
-        width: 95%;
+    50% {
+        transform: translateY(-30px) scale(1.05);
     }
 }
 
-@media (max-width: 576px) {
-    .container-fluid .mat-card {
-        width: 100%;
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+/* Glass Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: visible;
+    /* Allows glowing effects to spill if needed */
+}
+
+/* Header */
+.icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(100, 91, 255, 0.3);
+}
+
+.icon-wrapper mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: white;
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Form Styles */
+.modern-field {
+    width: 100%;
+}
+
+/* Angular Material Overrides for Dark Theme */
+::ng-deep .modern-field .mat-mdc-text-field-wrapper {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px;
+}
+
+::ng-deep .modern-field .mat-mdc-form-field-icon-suffix {
+    color: var(--text-secondary);
+}
+
+::ng-deep .modern-field .mat-mdc-floating-label {
+    color: var(--text-secondary);
+}
+
+::ng-deep .modern-field.mat-focused .mat-mdc-floating-label {
+    color: var(--primary-color);
+}
+
+::ng-deep .modern-field input,
+::ng-deep .modern-field .mat-mdc-select-value {
+    color: white !important;
+}
+
+/* Section Divider */
+.section-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--text-secondary);
+    margin: 1.5rem 0;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-divider span {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* File Upload */
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 4px;
+}
+
+.field-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-left: 4px;
+}
+
+.custom-file-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.file-name {
+    color: white;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.file-name.placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.5rem !important;
+    /* height via padding */
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)) !important;
+    box-shadow: 0 4px 15px rgba(100, 91, 255, 0.4);
+    transition: transform 0.2s;
+}
+
+.submit-btn:hover:not([disabled]) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(100, 91, 255, 0.5);
+}
+
+.reset-btn {
+    color: var(--text-secondary) !important;
+}
+
+.reset-btn:hover {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Error Alert */
+.alert-error {
+    background: rgba(244, 67, 54, 0.1);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #ff8a80;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+/* Links */
+.link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.link:hover {
+    color: var(--accent-color);
+}
+
+.link-secondary {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.link-secondary:hover {
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .glass-card {
+        padding: 2rem 1.5rem;
     }
 }

@@ -1,99 +1,99 @@
-<div id="main-wrapper" class="container">
-  <div class="row justify-content-center">
-    <div class="col-xl-10">
-      <mat-card class="border-0">
-        <mat-card-content class="p-0 shadow">
-          <div class="row no-gutters">
-            <div class="col-lg-6">
-              <div class="p-5">
-                <div class="mb-5">
-                  <h3 class="h4 font-weight-bold text-theme">Login</h3>
-                </div>
+<div class="login-page">
+  <!-- Animated background shapes -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
 
-                <h6 class="h5 mb-0">Welcome back!</h6>
-                <p class="text-muted mt-2 mb-5">
-                  Enter your email address and password to access the platform
-                </p>
-                <div *ngIf="loginError" class="alert alert-danger">
-                  {{ loginError }}
-                </div>
-                <form [formGroup]="loginForm" (ngSubmit)="login()">
-                  <mat-form-field class="form-group" appearance="fill">
-                    <mat-label>Email address</mat-label>
-                    <mat-icon matPrefix>email</mat-icon>
-                    <input
-                      matInput
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Enter email"
-                      formControlName="email"
-                      [ngClass]="{
-                        'is-invalid': submitted && f['email'].errors
-                      }"
-                    />
-                    <mat-error *ngIf="submitted && f['email'].errors">
-                      <div *ngIf="f['email'].errors['required']">
-                        Email is required.
-                      </div>
-                      <div *ngIf="f['email'].errors['email']">
-                        Invalid email format.
-                      </div>
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="form-group mb-5" appearance="fill">
-                    <mat-label>Password</mat-label>
-                    <mat-icon matPrefix>lock</mat-icon>
-                    <input
-                      matInput
-                      type="password"
-                      placeholder="Enter password"
-                      formControlName="password"
-                      [ngClass]="{
-                        'is-invalid': submitted && f['password'].errors
-                      }"
-                    />
-                    <mat-error *ngIf="submitted && f['password'].errors">
-                      <div *ngIf="f['password'].errors['required']">
-                        Password is required.
-                      </div>
-                      <div *ngIf="f['password'].errors['minlength']">
-                        Password must be at least 6 characters long.
-                      </div>
-                    </mat-error>
-                  </mat-form-field>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    type="submit"
-                    class="btn-theme"
-                  >
-                    Login
-                  </button>
-                  <div class="forgot-link float-right">
-                    No account?
-                    <a routerLink="/singup" class="text-primary"> Sign up </a>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-none d-lg-inline-block">
-              <div class="account-block rounded-right">
-                <div class="overlay rounded-right"></div>
-                <div class="account-testimonial">
-                  <h4 class="text-white mb-4">
-                    <span class="logo">Hrafty</span>
-                  </h4>
-                  <p class="lead text-white">
-                    Discover unique Moroccan artisan creations on Hrafty.
-                  </p>
-                </div>
-              </div>
-            </div>
+  <div class="login-container">
+    <!-- Left: Branding Panel -->
+    <div class="branding-panel">
+      <div class="branding-content">
+        <div class="brand-logo">
+          <mat-icon class="brand-icon">storefront</mat-icon>
+        </div>
+        <h1 class="brand-title">Hrafty</h1>
+        <p class="brand-subtitle">
+          Discover unique Moroccan artisan creations. Connect with talented craftsmen and explore authentic handmade
+          treasures.
+        </p>
+        <div class="brand-features">
+          <div class="feature-item">
+            <mat-icon>verified</mat-icon>
+            <span>Authentic Craftsmanship</span>
           </div>
-        </mat-card-content>
-      </mat-card>
+          <div class="feature-item">
+            <mat-icon>local_shipping</mat-icon>
+            <span>Nationwide Delivery</span>
+          </div>
+          <div class="feature-item">
+            <mat-icon>support_agent</mat-icon>
+            <span>Dedicated Support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Login Form -->
+    <div class="form-panel">
+      <div class="form-content">
+        <div class="form-header">
+          <h2 class="form-title">Welcome back</h2>
+          <p class="form-subtitle">Sign in to your account to continue</p>
+        </div>
+
+        <!-- Error Alert -->
+        <div *ngIf="loginError" class="error-alert" role="alert">
+          <mat-icon class="error-icon">error_outline</mat-icon>
+          <span>{{ loginError }}</span>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+          <!-- Email Field -->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email address</mat-label>
+            <mat-icon matPrefix class="field-icon">email</mat-icon>
+            <input matInput type="email" id="login-email" formControlName="email" placeholder="you@example.com"
+              autocomplete="email" />
+            <mat-error *ngIf="submitted && f['email'].errors">
+              <span *ngIf="f['email'].errors['required']">Email is required</span>
+              <span *ngIf="f['email'].errors['email']">Please enter a valid email</span>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Password Field -->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <mat-icon matPrefix class="field-icon">lock</mat-icon>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" id="login-password" formControlName="password"
+              placeholder="Enter your password" autocomplete="current-password" />
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Toggle password visibility'">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="submitted && f['password'].errors">
+              <span *ngIf="f['password'].errors['required']">Password is required</span>
+              <span *ngIf="f['password'].errors['minlength']">
+                Must be at least 6 characters
+              </span>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Submit Button -->
+          <button mat-raised-button color="primary" type="submit" class="login-button" [disabled]="isLoading">
+            <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
+            <span *ngIf="!isLoading">Sign In</span>
+            <span *ngIf="isLoading">Signing in...</span>
+          </button>
+
+          <!-- Sign Up Link -->
+          <div class="signup-link">
+            <span>Don't have an account?</span>
+            <a routerLink="/signup" class="signup-anchor">Create account</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

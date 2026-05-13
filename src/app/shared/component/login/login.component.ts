@@ -11,8 +11,10 @@ import { UserStorageService } from '../../services/storage/user-storage.service'
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  submitted: boolean = false;
-  loginError: string = '';
+  submitted = false;
+  loginError = '';
+  hidePassword = true;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,38 +27,42 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   get f(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
   }
 
-  login() {
+  login(): void {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
-      (res) => {
-        console.log(res);
-        if (UserStorageService.isSellerLoggedIn()) {
-          this.router.navigate(['seller/profile']);
-        } else if (UserStorageService.isCustomerLoggedIn()) {
-          this.router.navigateByUrl('customer');
+    this.isLoading = true;
+    this.loginError = '';
+
+    this.authService
+      .login(this.loginForm.value.email, this.loginForm.value.password)
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          if (UserStorageService.isSellerLoggedIn()) {
+            this.router.navigate(['seller/profile']);
+          } else if (UserStorageService.isCustomerLoggedIn()) {
+            this.router.navigateByUrl('customer');
+          }
+        },
+        error: (err) => {
+          this.isLoading = false;
+          if (err.error === 'Email not found') {
+            this.loginError = 'Email not found.';
+          } else if (err.error === 'Invalid password') {
+            this.loginError = 'Invalid password.';
+          } else {
+            this.loginError = 'An unexpected error occurred. Please try again later.';
+          }
         }
-      },
-      (err) => {
-        console.log(err);
-        if (err.error === 'Email not found') {
-          this.loginError = 'Email not found.';
-        } else if (err.error === 'Invalid password') {
-          this.loginError = 'Invalid password.';
-        } else {
-          this.loginError = 'An unexpected error occurred. Please try again later.';
-        }
-      }
-    );
+      });
   }
 }

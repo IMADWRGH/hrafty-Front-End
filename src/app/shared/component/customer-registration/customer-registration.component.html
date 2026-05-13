@@ -6,9 +6,9 @@
         <form [formGroup]="userSignupFormGroup" (ngSubmit)="onSubmit()">
           <div class="form-card">
             <div class="row">
-               <div *ngIf="EmailError" class="alert alert-danger">
-                  {{ EmailError}}
-                </div>
+              <div *ngIf="EmailError" class="alert alert-danger">
+                {{ EmailError}}
+              </div>
               <div class="col-md-6 form-group">
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-label>Email</mat-label>
@@ -36,7 +36,8 @@
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-label>Password</mat-label>
                   <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
-                  <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                  <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
                   <mat-error *ngIf="f['password'].errors">
@@ -75,7 +76,8 @@
               </div>
             </div>
             <div class="form-group text-center mt-4">
-              <button mat-raised-button color="primary" type="submit" [disabled]="userSignupFormGroup.invalid">Register</button>
+              <button mat-raised-button color="primary" type="submit"
+                [disabled]="userSignupFormGroup.invalid">Register</button>
               <button mat-raised-button color="warn" type="button" (click)="onReset()" class="ml-2">Reset</button>
             </div>
           </div>
