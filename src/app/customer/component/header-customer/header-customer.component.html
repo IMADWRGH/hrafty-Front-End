@@ -1,128 +1,86 @@
-<div *ngIf="isCustomerLoggedIn">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="home">Hrafty</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              aria-current="page"
-              routerLinkActive="active-link"
-              routerLink="home"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              aria-current="page"
-              routerLinkActive="active-link"
-              routerLink="services"
-              >Services</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              aria-current="page"
-              routerLinkActive="active-link"
-              routerLink="products"
-              >Products</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              aria-current="page"
-              routerLinkActive="active-link"
-              routerLink="contact"
-              >Contact</a
-            >
-          </li>
-        </ul>
-        <div>
-          <ul class="nav justify-content-end">
-              <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon
-                  [matBadge]="itemsQuantity"
-                  [matBadgeHidden]="!itemsQuantity"
-                  style="color: white;"
-                  >shopping_cart</mat-icon
-                >
+<nav class="modern-navbar">
+  <div class="container-fluid nav-container">
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="home">
+      <mat-icon class="brand-icon">storefront</mat-icon>
+      <span class="brand-text">Hrafty</span>
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" (click)="isMenuOpen = !isMenuOpen" [class.open]="isMenuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Navigation Links -->
+    <div class="navbar-menu" [class.show]="isMenuOpen">
+      <ul class="nav-links">
+        <li><a routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li><a routerLink="services" routerLinkActive="active">Services</a></li>
+        <li><a routerLink="products" routerLinkActive="active">Products</a></li>
+        <li><a routerLink="contact" routerLinkActive="active">Contact</a></li>
+      </ul>
+
+      <!-- User Controls -->
+      <div class="user-controls">
+        <!-- Cart -->
+        <button mat-icon-button [matMenuTriggerFor]="cartMenu" class="cart-btn">
+          <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity">shopping_cart</mat-icon>
+        </button>
+
+        <mat-menu #cartMenu="matMenu" class="modern-menu">
+          <div class="cart-dropdown p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="fw-bold">{{itemsQuantity}} items</span>
+              <a routerLink="cart" class="text-primary text-decoration-none">View Cart</a>
+            </div>
+
+            <div *ngIf="cart?.items?.length; else emptyCart" class="cart-items-list mb-3">
+              <div *ngFor="let item of cart?.items" class="cart-item d-flex justify-content-between mb-2">
+                <span>{{ item?.name }} <small class="text-muted">x {{ item?.quantity }}</small></span>
+                <span class="fw-bold">{{ item?.price | currency }}</span>
+              </div>
+            </div>
+            <ng-template #emptyCart>
+              <p class="text-center text-muted my-3">Your cart is empty</p>
+            </ng-template>
+
+            <div class="cart-total d-flex justify-content-between mb-3 pt-2 border-top">
+              <span>Total:</span>
+              <span class="fw-bold text-primary">{{ getTotal(cart?.items) | currency }}</span>
+            </div>
+
+            <div class="cart-actions d-flex gap-2">
+              <button mat-stroked-button color="warn" (click)="onClearCart()" class="flex-grow-1">
+                <mat-icon>remove_shopping_cart</mat-icon> Clear
               </button>
-              <mat-menu #menu="matMenu">
-                <div class="p-3 border-bottom">
-                  <div class="pb-3 d-flex justify-content-between">
-                    <span class="me-4">{{itemsQuantity}} items</span>
-                    <a class="cart_link" routerLink="cart">View Cart</a>
-                  </div>
-                  <div *ngIf="cart?.items.length" class="py-3">
-                    <div
-                      *ngFor="let item of cart?.items"
-                      class="d-flex justify-content-between font-light mb-2"
-                    >
-                      {{ item?.name }} x {{ item?.quantity }}
-                      <span class="fw-bold">{{ item?.price | currency }}</span>
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between py-3 font-light">
-                    Total:
-                    <span class="fw-bold">{{
-                      getTotal(cart?.items) | currency
-                    }}</span>
-                  </div>
-                  <div class="pt-3 d-flex justify-content-between">
-                    <button mat-icon-button
-                      (click)="onClearCart()"
-                      color="warn"
-                    >
-                      <mat-icon>remove_shopping_cart</mat-icon>
-                    </button>
-                    <button mat-icon-button
-                      routerLink="cart"
-                      color="primary"
-                    >
-                      <mat-icon>shopping_cart_checkout</mat-icon>
-                    </button>
-                  </div>
-                </div>
-              </mat-menu>
-            <li class="nav-item">
-              <button
-                mat-button
-                [matMenuTriggerFor]="userMenu"
-                class="nav-link d-flex align-items-center"
-              >
-                <img
-               *ngIf="customer"
-                 [src]="customer.imageURL"
-                 class="profile-image"
-                />
-                <span class="ms-2 text-white">{{ user?.fullName }}</span>
+              <button mat-raised-button color="primary" routerLink="cart" class="flex-grow-1">
+                <mat-icon>shopping_cart_checkout</mat-icon> Checkout
               </button>
-              <mat-menu #userMenu="matMenu">
-                <button mat-menu-item [routerLink]="['/customer/profile']">
-                  Profile
-                </button>
-                <mat-divider></mat-divider>
-                <button mat-menu-item (click)="logOut()">Logout</button>
-              </mat-menu>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </div>
+        </mat-menu>
+
+        <!-- Profile -->
+        <button mat-button [matMenuTriggerFor]="userMenu" class="profile-btn">
+          <img *ngIf="customer" [src]="getCustomerImage()" class="profile-avatar" />
+          <span class="profile-name">{{ user?.fullName || 'User' }}</span>
+          <mat-icon>expand_more</mat-icon>
+        </button>
+
+        <mat-menu #userMenu="matMenu" class="modern-menu">
+          <button mat-menu-item routerLink="/customer/profile">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logOut()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
       </div>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>
